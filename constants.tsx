@@ -19,6 +19,12 @@ const Email = () => (
   </svg>
 );
 
+const Globe = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9" />
+    </svg>
+  );
+
 const LinkedIn = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
     <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
@@ -47,22 +53,50 @@ const Zapier = () => (
 
 const Make = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="10" fill="#ff6600"/>
+        <circle cx="12" cy="12" r="4" fill="white"/>
     </svg>
 );
 
 const N8N = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 12l3 3 3-3-3-3z"/>
-        <path d="M15 12l3 3 3-3-3-3z"/>
-        <path d="M9 6l3 3 3-3-3-3z"/>
-        <path d="M9 18l3 3 3-3-3-3z"/>
-        <path d="M6 9v6"/>
-        <path d="M18 9v6"/>
-        <path d="M9 6H6"/>
-        <path d="M9 18H6"/>
-        <path d="M15 6h3"/>
-        <path d="M15 18h3"/>
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2 L2 7 L12 12 L22 7 L12 2 Z"/>
+        <path d="M2 17 L12 22 L22 17"/>
+        <path d="M2 12 L12 17 L22 12"/>
+    </svg>
+);
+
+const WorkflowAutomation = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+    </svg>
+);
+
+const AIPowered = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25c-2.488 0-4.5 2.012-4.5 4.5s2.012 4.5 4.5 4.5 4.5-2.012 4.5-4.5-2.012-4.5-4.5-4.5z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a8.966 8.966 0 01-5.044-1.493m10.088 0A8.966 8.966 0 0112 21z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3a8.966 8.966 0 015.044 1.493m-10.088 0A8.966 8.966 0 0112 3z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12a8.966 8.966 0 011.493-5.044m0 10.088A8.966 8.966 0 013 12z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a8.966 8.966 0 01-1.493 5.044m0-10.088A8.966 8.966 0 0121 12z" />
+    </svg>
+);
+
+const CRMAutomation = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.228a4.5 4.5 0 00-1.39-1.39C6.54 11.08 3.5 10.5 3.5 10.5S2.92 7.46 4.39 6.09a4.5 4.5 0 011.39-1.39C7.46 2.92 10.5 3.5 10.5 3.5s.58 3.04 2.05 4.51a4.5 4.5 0 01-1.39 1.39l-2.05 2.05a4.5 4.5 0 00-1.39 1.39z" />
+    </svg>
+);
+
+const DataIntegration = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75" />
+    </svg>
+);
+
+const EmailNotifications = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
     </svg>
 );
 
@@ -70,10 +104,16 @@ export const Icons = {
   Location,
   Phone,
   Email,
+  Globe,
   LinkedIn,
   Upwork,
   OnlineJobs,
   Zapier,
   Make,
   N8N,
+  WorkflowAutomation,
+  AIPowered,
+  CRMAutomation,
+  DataIntegration,
+  EmailNotifications,
 };

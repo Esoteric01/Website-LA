@@ -4,29 +4,66 @@ import { Icons } from '../constants';
 
 const projectsData: ProjectCategory[] = [
   {
-    platform: "Zapier Automations",
+    platform: "Zapier Projects",
     icon: <Icons.Zapier />,
     projects: [
-      { title: "Lead Enrichment Automation with Webhooks Integration", description: "Automated lead data enrichment and routing." },
-      { title: "AI Content Repurposing", description: "Streamlined content transformation for multiple platforms." },
+      { 
+        title: "Lead Enrichment Automation with Webhooks Integration", 
+        description: "Automatically enrich incoming leads from forms and CRMs by fetching additional data from third-party APIs via Webhooks.",
+        technologyUsed: ["Zapier", "Webhooks", "Google Sheets", "HubSpot API"]
+      },
+      { 
+        title: "AI Content Repurposing", 
+        description: "Repurposed blog posts into social media captions, email snippets, and LinkedIn posts automatically using AI.",
+        technologyUsed: ["Zapier", "OpenAI API", "Google Docs", "Buffer"]
+      },
+      { 
+        title: "CRM Workflow Automation in Asana", 
+        description: "Streamlined client onboarding by automatically creating tasks, subtasks, and Google Drive folders when leads reached specific stages in Asana.",
+        technologyUsed: ["Zapier", "Asana", "Google Drive", "Slack"]
+      },
     ],
   },
   {
-    platform: "Make (Integromat) Automations",
+    platform: "Make (Integromat) Projects",
     icon: <Icons.Make />,
     projects: [
-      { title: "Automated Export Account Transactions (Xero → Asana)", description: "Generated CSV exports from Xero and uploaded them to Asana automatically." },
-      { title: "Auto-Sort Gmail Attachments on Google Drive", description: "Created file organization workflows for incoming email attachments." },
+      { 
+        title: "Automated Xero to Asana CSV Export", 
+        description: "Pulled financial data from Xero and exported it to Asana in CSV format for team review, reducing manual data entry.",
+        technologyUsed: ["Make (Integromat)", "Xero API", "Asana", "Google Sheets"]
+      },
+      { 
+        title: "Automated Gmail Attachment Organizer for Google Drive", 
+        description: "Automatically scanned incoming Gmail attachments and organized them into categorized folders in Google Drive.",
+        technologyUsed: ["Make (Integromat)", "Gmail", "Google Drive"]
+      },
     ],
   },
   {
-    platform: "N8N Automations",
+    platform: "n8n Projects",
     icon: <Icons.N8N />,
     projects: [
-      { title: "AI Agent for FB Page", description: "Built a chatbot-like workflow powered by N8N for handling FAQs and customer inquiries." },
-      { title: "Auto-Save Gmail Invoice/Receipt Attachments to Google Drive", description: "Reduced manual email-to-drive tasks." },
-      { title: "Automated Daily Sales & Orders Report via Slack", description: "Delivered real-time sales insights to teams." },
-      { title: "Automated Email Summarization with AI & Slack Notifications", description: "Used AI to summarize emails and push key info to Slack." },
+      { 
+        title: "AI Agent for Facebook Page", 
+        description: "Implemented an AI-powered agent to automatically respond to comments and messages on Facebook pages.",
+        technologyUsed: ["n8n", "Facebook Graph API", "OpenAI API"]
+      },
+      { 
+        title: "Auto-Save Gmail Invoice/Receipt Attachments to Google Drive", 
+        description: "Automatically detected invoices and receipts in Gmail and saved them to specific folders in Google Drive.",
+        technologyUsed: ["n8n", "Gmail", "Google Drive"]
+      },
+      { 
+        title: "Automated Daily Sales & Orders Report via Slack", 
+        description: "Pulled daily sales and orders data from APIs and sent formatted summary reports to Slack channels.",
+        technologyUsed: ["n8n", "Slack API", "Google Sheets", "E-commerce API"]
+      },
+      { 
+        title: "Automated Email Summarization with AI & Slack Notifications", 
+        description: "Summarized incoming emails using AI and sent highlights to Slack for team awareness.",
+        technologyUsed: ["n8n", "Gmail", "OpenAI API", "Slack"]
+      },
     ],
   },
 ];

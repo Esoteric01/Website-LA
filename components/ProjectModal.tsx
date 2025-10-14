@@ -29,7 +29,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
       role="dialog"
     >
       <div
-        className="bg-surface rounded-xl shadow-2xl w-full max-w-4xl transform transition-all duration-300 scale-95 animate-fade-in-up border border-border relative overflow-y-auto max-h-[90vh]"
+        className="bg-surface rounded-xl shadow-2xl w-full max-w-[85vw] transform transition-all duration-300 scale-95 animate-fade-in-up border border-border relative overflow-y-auto max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -49,7 +49,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           </p>
 
           <div className="my-8 rounded-lg overflow-hidden shadow-lg border border-border">
-             <img src={project.imageUrl} alt={project.title} className="w-full h-auto object-cover aspect-video" />
+             <img src={project.imageUrl} alt={project.title} className="w-full h-auto" loading="lazy" />
           </div>
 
           <div className="border-t border-border pt-6">

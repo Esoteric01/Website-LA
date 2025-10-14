@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const navLinks = [
     { id: 'services', title: 'Services' },
     { id: 'skills', title: 'Skills' },
-    { id: 'projects', title: 'Work' },
+    { id: 'projects', title: 'Projects' },
   ];
 
   const socialLinks = [

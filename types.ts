@@ -22,15 +22,6 @@ export interface ProjectCategory {
   projects: Project[];
 }
 
-export interface Experience {
-  role: string;
-  company: string;
-  location: string;
-  period: string;
-  tasks: string[];
-  achievements: string[];
-}
-
 export interface Service {
   icon: ReactElement;
   title: string;

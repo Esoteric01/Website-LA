@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
 const createGradientPlaceholder = (platform: string, color1: string, color2: string, iconColor: string): string => {
@@ -123,7 +122,7 @@ const createGradientPlaceholder = (platform: string, color1: string, color2: str
 const rawProjectData = [
   {
     platform: "n8n Projects",
-    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/n8n.png?raw=true" alt="n8n logo" className="h-full w-full object-contain" />,
+    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/n8n.png?raw=true" alt="n8n logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
       { 
         title: "AI Agent for Facebook Page", 
@@ -153,38 +152,37 @@ const rawProjectData = [
   },
   {
     platform: "Zapier Projects",
-    icon: <img src="https://raw.githubusercontent.com/Esoteric01/loizalmerino.com-assets/63f6c62cf0ca76d0b2b0830591ddff179e9c9295/Automation%20Projects%20Images/zapier.svg" alt="Zapier logo" className="h-full w-full object-contain" />,
+    icon: <img src="https://raw.githubusercontent.com/Esoteric01/loizalmerino.com-assets/63f6c62cf0ca76d0b2b0830591ddff179e9c9295/Automation%20Projects%20Images/zapier.svg" alt="Zapier logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
-      { 
-        title: "Lead Enrichment Automation with Webhooks Integration", 
-        description: "Automatically enrich incoming leads from forms and CRMs by fetching additional data from third-party APIs via Webhooks.",
-        technologyUsed: ["Zapier", "Webhooks", "Google Sheets", "HubSpot API"],
-      },
       { 
         title: "AI Content Repurposing", 
         description: "Repurposed blog posts into social media captions, email snippets, and LinkedIn posts automatically using AI.",
         technologyUsed: ["Zapier", "OpenAI API", "Google Docs", "Buffer"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing.jpg?raw=true",
       },
       { 
         title: "CRM Workflow Automation in Asana", 
         description: "Streamlined client onboarding by automatically creating tasks, subtasks, and Google Drive folders when leads reached specific stages in Asana.",
         technologyUsed: ["Zapier", "Asana", "Google Drive", "Slack"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20CRM%20Workflow%20Automation%20in%20Asana.jpg?raw=true",
       },
     ],
   },
   {
     platform: "Make (Integromat) Projects",
-    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/make.png?raw=true" alt="Make.com logo" className="h-full w-full object-contain" />,
+    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/make.png?raw=true" alt="Make.com logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
       { 
         title: "Automated Xero to Asana CSV Export", 
         description: "Pulled financial data from Xero and exported it to Asana in CSV format for team review, reducing manual data entry.",
         technologyUsed: ["Make (Integromat)", "Xero API", "Asana", "Google Sheets"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export.jpg?raw=true",
       },
       { 
         title: "Automated Gmail Attachment Organizer for Google Drive", 
         description: "Automatically scanned incoming Gmail attachments and organized them into categorized folders in Google Drive.",
         technologyUsed: ["Make (Integromat)", "Gmail", "Google Drive"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive.jpg?raw=true",
       },
     ],
   },
@@ -215,11 +213,69 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>(projectsData[0].platform);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const activeCategory = projectsData.find(cat => cat.platform === selectedPlatform);
 
+  useEffect(() => {
+    if (activeCategory) {
+      projectCardRefs.current = projectCardRefs.current.slice(0, activeCategory.projects.length);
+    }
+  }, [activeCategory]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true);
+                observer.unobserve(entry.target);
+            }
+        },
+        { threshold: 0.1 }
+    );
+    if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+    }
+
+    const handleScroll = () => {
+      const screenHeight = window.innerHeight;
+      projectCardRefs.current.forEach((ref, index) => {
+        if (ref) {
+          const { top, height } = ref.getBoundingClientRect();
+          if (top < screenHeight && top > -height) {
+            const speed = (index % 2 === 0) ? -0.05 : -0.08;
+            const translateY = (screenHeight / 2 - top) * speed;
+            ref.style.transform = `translateY(${translateY}px)`;
+          }
+        }
+      });
+    };
+
+    const onScroll = () => window.requestAnimationFrame(handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    return () => {
+        if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+        }
+        window.removeEventListener('scroll', onScroll);
+    };
+  }, [activeCategory]);
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--x', `${x}px`);
+    card.style.setProperty('--y', `${y}px`);
+  };
+
   return (
-    <section id="projects" className="py-20 md:py-28">
-      <div className="text-center mb-12">
+    <section ref={sectionRef} id="projects" className="py-20 md:py-28">
+      <div className={`text-center mb-12 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
         <h2 className="text-5xl sm:text-6xl font-black font-display mb-4 text-text-main">Automation Projects</h2>
         <p className="max-w-3xl mx-auto text-2xl text-primary">
           A collection of automation builds powered by AI and integration tools.
@@ -245,40 +301,53 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
 
       <div>
         {activeCategory && (
-          <div className="max-w-7xl mx-auto animate-fade-in-up" key={selectedPlatform}>
+          <div className="max-w-7xl mx-auto" key={selectedPlatform}>
             <div className="space-y-8">
               {activeCategory.projects.map((project, projIndex) => (
                 <div 
-                  key={projIndex} 
-                  className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-x-8 gap-y-8 relative overflow-hidden bg-surface rounded-2xl p-8 border border-border transition-all duration-300 hover:border-primary/80 hover:bg-[radial-gradient(ellipse_at_top,_rgba(0,196,106,0.15)_0%,_transparent_70%)] hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] hover:-translate-y-2 cursor-hover-target"
+                  key={projIndex}
+                  ref={el => projectCardRefs.current[projIndex] = el}
+                  className={`${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}
+                  style={{ willChange: 'transform', animationDelay: `${projIndex * 150}ms` }}
                 >
-                  {/* Text Content Column */}
-                  <div className="lg:col-span-5 flex flex-col h-full">
-                    <div className="w-10 h-10 mb-4 text-primary">{activeCategory.icon}</div>
-                    <h3 className="text-3xl font-bold font-display text-text-main mb-4">{project.title}</h3>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologyUsed.map((tech, index) => (
-                        <span key={index} className="border border-primary text-primary text-sm font-medium px-3 py-1.5 rounded-full">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-lg text-text-secondary mb-8 leading-relaxed flex-grow">{project.description}</p>
-                    <button
-                      onClick={() => onProjectClick(project)}
-                      className="bg-primary hover:bg-primary/90 text-background font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target self-start"
-                    >
-                      View Work
-                    </button>
-                  </div>
-
-                  {/* Image Content Column */}
-                  <div className="lg:col-span-7">
+                  <div 
+                    onClick={() => onProjectClick(project)}
+                    onMouseMove={handleMouseMove}
+                    className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-x-8 gap-y-8 relative overflow-hidden bg-surface rounded-2xl p-8 border border-border transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target"
+                  >
                     <div 
-                      onClick={() => onProjectClick(project)}
-                      className="rounded-xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] cursor-pointer"
-                    >
-                      <img src={project.imageUrl} alt={project.title} className="w-full h-auto object-cover aspect-video" />
+                        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        style={{
+                            background: `radial-gradient(600px circle at var(--x) var(--y), rgba(0, 196, 106, 0.1), transparent 40%)`,
+                        }}
+                    />
+                    {/* Text Content Column */}
+                    <div className="lg:col-span-5 flex flex-col h-full relative">
+                      <div className="w-10 h-10 mb-4 text-primary">{activeCategory.icon}</div>
+                      <h3 className="text-3xl font-bold font-display text-text-main mb-4">{project.title}</h3>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.technologyUsed.map((tech, index) => (
+                          <span key={index} className="border border-primary text-primary text-sm font-medium px-3 py-1.5 rounded-full">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-lg text-text-secondary mb-8 leading-relaxed flex-grow">{project.description}</p>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); onProjectClick(project); }}
+                        className="bg-primary hover:bg-primary/90 text-background font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target self-start"
+                      >
+                        View Work
+                      </button>
+                    </div>
+
+                    {/* Image Content Column */}
+                    <div className="lg:col-span-7 relative">
+                      <div 
+                        className="rounded-xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] cursor-pointer"
+                      >
+                        <img src={project.imageUrl} alt={project.title} className="w-full h-auto object-cover aspect-video" loading="lazy" />
+                      </div>
                     </div>
                   </div>
                 </div>

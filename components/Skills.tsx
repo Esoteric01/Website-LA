@@ -1,9 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { toolsData } from '../data/tools';
 import AllSkillsModal from './AllSkillsModal';
 
 const Skills: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true);
+                observer.unobserve(entry.target);
+            }
+        },
+        { threshold: 0.1 }
+    );
+    if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+    }
+    return () => {
+        if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+        }
+    };
+  }, []);
   
   const midIndex = Math.ceil(toolsData.length / 2);
   const firstRowTools = toolsData.slice(0, midIndex);
@@ -13,8 +35,8 @@ const Skills: React.FC = () => {
   const duplicatedSecondRow = [...secondRowTools, ...secondRowTools];
 
   return (
-    <section id="skills" className="py-20 md:py-36 relative overflow-hidden">
-      <div className="text-center mb-16 animate-fade-in-up">
+    <section ref={sectionRef} id="skills" className="py-20 md:py-36 relative overflow-hidden">
+      <div className={`text-center mb-16 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
         <h2 className="text-5xl sm:text-6xl font-black font-display text-text-main mb-4">
           Automation Stack
         </h2>
@@ -26,7 +48,7 @@ const Skills: React.FC = () => {
       <div className="space-y-8">
         {/* First Row */}
         <div className="w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_10%,_black_90%,transparent_100%)]">
-          <div className="flex w-max animate-slide">
+          <div className="flex w-max motion-safe:animate-slide">
             {duplicatedFirstRow.map((tool, index) => (
               <div
                 key={`${tool.name}-${index}-first`}
@@ -43,7 +65,7 @@ const Skills: React.FC = () => {
 
         {/* Second Row */}
         <div className="w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_10%,_black_90%,transparent_100%)]">
-          <div className="flex w-max animate-slide-reverse">
+          <div className="flex w-max motion-safe:animate-slide-reverse">
             {duplicatedSecondRow.map((tool, index) => (
               <div
                 key={`${tool.name}-${index}-second`}
@@ -59,10 +81,10 @@ const Skills: React.FC = () => {
         </div>
       </div>
       
-      <div className="text-center mt-16 animate-fade-in-up">
+      <div className={`text-center mt-16 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary hover:bg-primary/90 text-background font-bold py-3 px-8 rounded-lg transition-all duration-300 transform active:scale-95 text-lg cursor-hover-target shadow-lg hover:-translate-y-1"
+            className="bg-primary hover:bg-primary/90 text-background font-bold py-3 px-8 rounded-lg transition-all duration-300 transform active:scale-95 text-lg cursor-hover-target shadow-lg motion-safe:hover:-translate-y-1"
           >
               Explore All
           </button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Experience as ExperienceType } from '../types';
 
 const experienceData: ExperienceType[] = [
@@ -53,7 +53,7 @@ const experienceData: ExperienceType[] = [
         ],
         achievements: [
             "Network Deployment and Redundancy Implementation for DELL Switches",
-            "C9200 Access Switch Upgrade Project for three sites",
+            "C9200 Access Switch Upgrade for three sites",
             "Deployment of Cisco Firepower 2110, Cisco Meraki MS250-24 L3 Switch, Cisco Meraki MS120-48 L2 Switch & Cisco Meraki MR36 Access Point"
         ]
     },
@@ -73,31 +73,64 @@ const experienceData: ExperienceType[] = [
 ];
 
 const Experience: React.FC = () => {
+    const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+    const handleToggle = (index: number) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
     return (
-        <section id="experience" className="py-20">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Work Experience</h2>
-            <div className="relative border-l-2 border-orange-200 ml-6 md:ml-0">
-                {experienceData.map((job, index) => (
-                    <div key={index} className="mb-12 ml-10">
-                        <span className="absolute -left-4 flex items-center justify-center w-8 h-8 bg-orange-200 rounded-full ring-8 ring-white">
-                            <svg className="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm2 2a1 1 0 00-1 1v1a1 1 0 001 1h4a1 1 0 001-1V5a1 1 0 00-1-1H8z" clipRule="evenodd"></path></svg>
-                        </span>
-                        <h3 className="text-xl font-semibold text-gray-900">{job.role}</h3>
-                        <p className="text-md font-medium text-gray-700">{job.company}</p>
-                        <time className="block mb-2 text-sm font-normal leading-none text-gray-500">{job.period} &bull; {job.location}</time>
-                        <ul className="list-disc pl-5 my-4 space-y-1 text-gray-600">
-                            {job.tasks.map((task, i) => <li key={i}>{task}</li>)}
-                        </ul>
-                        {job.achievements.length > 0 && (
-                            <div>
-                                <h4 className="font-semibold text-gray-800 mb-2">Projects / Accomplishments:</h4>
-                                <ul className="list-disc pl-5 space-y-1 text-gray-600">
-                                    {job.achievements.map((ach, i) => <li key={i}>{ach}</li>)}
-                                </ul>
+        <section id="experience" className="py-20 md:py-28">
+            <h2 className="text-5xl sm:text-6xl font-black font-display text-center mb-16 text-primary">Work Experience</h2>
+            
+            <div className="max-w-4xl mx-auto space-y-4">
+                {experienceData.map((job, index) => {
+                    const isOpen = openIndex === index;
+                    return (
+                        <div key={index} className="border border-border rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:border-border/80">
+                            <button 
+                                onClick={() => handleToggle(index)}
+                                className="w-full p-6 text-left flex justify-between items-center bg-surface hover:bg-border/50 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-hover-target"
+                                aria-expanded={isOpen}
+                                aria-controls={`experience-content-${index}`}
+                            >
+                                <div className="flex-1 pr-4">
+                                    <h3 className="text-2xl font-bold font-display text-text-main">{job.role}</h3>
+                                    <p className="text-lg font-medium text-text-secondary">{job.company}</p>
+                                </div>
+                                <div className="flex items-center space-x-4">
+                                   <span className="text-lg font-normal text-text-secondary hidden md:block flex-shrink-0">{job.period}</span>
+                                   <div className="flex-shrink-0">
+                                       <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 text-secondary transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                       </svg>
+                                   </div>
+                                </div>
+                            </button>
+                            <div 
+                                id={`experience-content-${index}`}
+                                className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[1200px]' : 'max-h-0'}`}
+                            >
+                                <div className="p-6 border-t border-border bg-background">
+                                    <time className="block mb-4 text-lg font-normal leading-none text-text-secondary md:hidden">{job.period}</time>
+                                    <p className="block mb-4 text-lg font-normal text-text-secondary">{job.location}</p>
+                                    <h4 className="font-semibold text-text-main text-lg mb-2">Tasks & Responsibilities:</h4>
+                                    <ul className="list-disc pl-5 mb-6 space-y-1 text-text-secondary text-xl">
+                                        {job.tasks.map((task, i) => <li key={i}>{task}</li>)}
+                                    </ul>
+                                    {job.achievements.length > 0 && (
+                                        <div className="bg-surface p-4 rounded-lg border border-border">
+                                            <h4 className="font-semibold text-text-main text-lg mb-2">Projects / Accomplishments:</h4>
+                                            <ul className="list-disc pl-5 space-y-1 text-text-secondary text-lg">
+                                                {job.achievements.map((ach, i) => <li key={i}>{ach}</li>)}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        )}
-                    </div>
-                ))}
+                        </div>
+                    );
+                })}
             </div>
         </section>
     );

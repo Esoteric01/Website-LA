@@ -4,49 +4,55 @@ import { Icons } from '../constants';
 
 const servicesData: Service[] = [
   {
-    icon: <Icons.WorkflowAutomation />,
-    title: 'Workflow Automation',
-    description: 'Connect apps like Google Workspace, Slack, Notion, Airtable, and Asana to streamline your processes.',
+    icon: <Icons.IconServiceWorkflow />,
+    title: "Workflow Automation",
+    description: "Expert in Zapier, Make (Integromat), GoHighLevel, and n8n. I build intelligent automation systems that eliminate repetitive tasks and streamline your business processes.",
   },
   {
-    icon: <Icons.AIPowered />,
-    title: 'AI-Powered Processes',
-    description: 'Use OpenAI and automation tools to generate content, replies, and reports automatically.',
+    icon: <Icons.IconServiceCRMAndMarketing />,
+    title: "CRM & Marketing Automation",
+    description: "Specialized in HubSpot and GoHighLevel implementation. I create automated lead pipelines, follow-up sequences, and customer engagement workflows that drive conversions.",
   },
   {
-    icon: <Icons.CRMAutomation />,
-    title: 'CRM & Marketing Automation',
-    description: 'Streamline lead nurturing and customer engagement in platforms like GoHighLevel.',
+    icon: <Icons.IconServiceAPI />,
+    title: "API Integration & Scripting",
+    description: "Proficient in Google Apps Script and API integrations. I connect your tools seamlessly with custom scripts, webhooks, and REST API implementations.",
   },
   {
-    icon: <Icons.DataIntegration />,
-    title: 'Data Integration',
-    description: 'Sync multiple platforms to keep your data consistent, accurate, and centralized.',
+    icon: <Icons.IconServiceAI />,
+    title: "AI-Powered Automation",
+    description: "Building smart automation workflows with AI integration. I leverage tools like Google Gemini to create intelligent systems that adapt and respond dynamically.",
   },
   {
-    icon: <Icons.EmailNotifications />,
-    title: 'Email & Notification Systems',
-    description: 'Automate critical alerts, approval workflows, and timely reminders for your team.',
+    icon: <Icons.IconServiceCRM />,
+    title: "Data Management",
+    description: "Expert in Airtable, Google Sheets, and Monday.com. I design efficient data structures and automated reporting systems that keep your business organized.",
   },
 ];
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-20 bg-white rounded-xl shadow-sm mb-12">
-      <div className="container mx-auto px-6 md:px-12">
-        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Automation Services</h2>
-        <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">I help digital agencies, freelancers, and business owners automate repetitive tasks and build scalable systems.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.slice(0, 5).map((service, index) => (
-            <div key={index} className={`bg-gray-50 rounded-lg p-6 text-center ring-1 ring-gray-200 hover:ring-orange-500 transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-lg ${servicesData.length > 3 && servicesData.length % 3 === 2 && index >= servicesData.length - 2 ? 'lg:col-span-1 lg:col-start-auto' : ''} ${servicesData.length === 5 && index === 3 ? 'lg:col-start-1 lg:ml-[17%]' : ''} ${servicesData.length === 5 && index === 4 ? 'lg:col-start-auto lg:mr-[17%]' : ''}`}>
-              <div className="inline-block text-orange-500 mb-4">
+    <section id="services" className="py-20 md:py-28 relative overflow-hidden">
+      <h2 className="text-5xl sm:text-6xl font-black font-display text-center mb-4 text-text-main">What I Offer</h2>
+      <p className="max-w-3xl mx-auto text-2xl text-primary mb-12 text-center">
+        I specialize in connecting your apps and automating workflows, so you can focus on what matters most.
+      </p>
+      <div className="flex flex-wrap justify-center gap-8">
+        {servicesData.map((service, index) => (
+          <div 
+            key={index} 
+            className="animate-fade-in-up relative bg-surface rounded-2xl p-8 border border-border transition-all duration-300 hover:border-primary/80 hover:bg-[radial-gradient(ellipse_at_top,_rgba(0,196,106,0.15)_0%,_transparent_70%)] hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] hover:-translate-y-2 flex flex-col items-center text-center w-full max-w-sm cursor-hover-target overflow-hidden"
+            style={{ animationDelay: `${index * 100}ms`, opacity: 0 }}
+          >
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl border border-primary/50 text-primary">
+              <div className="h-10 w-10">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
             </div>
-          ))}
-        </div>
+            <h3 className="text-2xl font-bold font-display text-text-main mb-3">{service.title}</h3>
+            <p className="text-text-secondary leading-relaxed text-lg flex-grow">{service.description}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

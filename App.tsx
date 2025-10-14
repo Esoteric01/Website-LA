@@ -4,11 +4,10 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectModal from './components/ProjectModal';
+import CustomCursor from './components/CustomCursor';
 import { Project } from './types';
 
 const App: React.FC = () => {
@@ -23,15 +22,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-50 text-gray-800 font-sans">
+    <div className="text-text-main font-sans relative isolate">
+      <CustomCursor />
       <Header />
-      <main className="container mx-auto px-6 md:px-12">
+      <main className="max-w-8xl mx-auto px-4 md:px-8">
         <Hero />
         <Services />
         <Skills />
         <Projects onProjectClick={handleProjectClick} />
-        <Experience />
-        <Testimonials />
         <Contact />
       </main>
       <Footer />

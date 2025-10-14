@@ -13,6 +13,7 @@ export interface Project {
   title: string;
   description: string;
   technologyUsed: string[];
+  imageUrl: string;
 }
 
 export interface ProjectCategory {
@@ -40,4 +41,12 @@ export interface Testimonial {
   quote: string;
   author: string;
   company: string;
+}
+
+export interface Tool {
+  // Fix: Changed React.ReactElement to ReactElement to match the existing import.
+  icon: ReactElement;
+  name: string;
+  category: string;
+  description: string;
 }

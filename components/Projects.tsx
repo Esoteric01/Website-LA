@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -126,27 +127,53 @@ const rawProjectData = [
     projects: [
       { 
         title: "AI Agent for Facebook Page", 
-        description: "Implemented an AI-powered agent to automatically respond to comments and messages on Facebook pages.",
+        description: "Overview:\nImplemented an AI-powered agent to automatically respond to comments and messages on Facebook pages, improving engagement and response times.\n\nProcess:\nThe n8n workflow listens for new comments and messages via the Facebook Graph API. It then sends the content to the OpenAI API (ChatGPT) to generate a contextually relevant response, which is posted back to Facebook.\n\nResults:\nReduced manual moderation effort by 80%, decreased average response time from hours to seconds, and increased user engagement on posts.",
         technologyUsed: ["n8n", "Facebook Graph API", "OpenAI API"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20For%20FB%20Page.jpg?raw=true",
+        images: [{
+          label: "n8n Workflow Screenshot",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20For%20FB%20Page.jpg?raw=true"
+        }]
       },
       { 
         title: "Auto-Save Gmail Invoice/Receipt Attachments to Google Drive", 
-        description: "Automatically detected invoices and receipts in Gmail and saved them to specific folders in Google Drive.",
+        description: "Overview:\nAutomatically detected invoices and receipts in Gmail and saved them to specific folders in Google Drive.\n\nProcess:\nI used n8n to listen for new Gmail messages containing “invoice” or “receipt.” The workflow filters and moves attachments into Drive with date-based folder naming.\n\nResults:\nEliminated manual saving tasks, reduced lost documents, and ensured 100% invoice capture accuracy.",
         technologyUsed: ["n8n", "Gmail", "Google Drive"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive.jpg?raw=true",
+        images: [
+          { 
+            label: "N8N Screenshot", 
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive%20-%20N8N.jpg?raw=true" 
+          },
+          { 
+            label: "Google Drive Screenshot", 
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive%20-%20Google%20Drive.jpg?raw=true" 
+          },
+          { 
+            label: "Google Sheet Screenshot", 
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive%20-%20Google%20Sheet.jpg?raw=true" 
+          },
+        ],
       },
       { 
         title: "Automated Daily Sales & Orders Report via Slack", 
-        description: "Pulled daily sales and orders data from APIs and sent formatted summary reports to Slack channels.",
+        description: "Overview:\nCreated an automated system to pull daily sales and orders data from e-commerce APIs and deliver a formatted summary report to key Slack channels.\n\nProcess:\nAn n8n workflow runs on a daily schedule, making API calls to the e-commerce platform. The data is aggregated, formatted into a readable report, and then posted to a designated Slack channel.\n\nResults:\nSaved over 5 hours of manual reporting work per week, provided real-time visibility into sales performance for the management team, and eliminated data entry errors.",
         technologyUsed: ["n8n", "Slack API", "Google Sheets", "E-commerce API"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack.jpg?raw=true",
+        images: [{
+          label: "Sales Report Automation",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack.jpg?raw=true"
+        }]
       },
       { 
         title: "Automated Email Summarization with AI & Slack Notifications", 
-        description: "Summarized incoming emails using AI and sent highlights to Slack for team awareness.",
+        description: "Overview:\nDeveloped a workflow that automatically summarizes important incoming emails using AI and sends the key highlights to a team Slack channel for quick awareness.\n\nProcess:\nThe n8n workflow triggers on new emails in a specific Gmail folder. The email content is passed to the OpenAI API for summarization. The concise summary is then posted as a notification in Slack, with a link to the original email.\n\nResults:\nDrastically reduced the time spent reading long email threads, ensured critical information was never missed, and improved team-wide communication and response speed.",
         technologyUsed: ["n8n", "Gmail", "OpenAI API", "Slack"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20and%20Slack%20Notifications.jpg?raw=true",
+        images: [{
+          label: "Email Summarization Workflow",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20and%20Slack%20Notifications.jpg?raw=true"
+        }]
       },
     ],
   },
@@ -156,15 +183,23 @@ const rawProjectData = [
     projects: [
       { 
         title: "AI Content Repurposing", 
-        description: "Repurposed blog posts into social media captions, email snippets, and LinkedIn posts automatically using AI.",
+        description: "Overview:\nBuilt an AI-driven automation that repurposes long-form blog posts into various short-form content formats, such as social media captions, email newsletter snippets, and LinkedIn articles.\n\nProcess:\nWhen a new blog post is published, a Zapier workflow sends the content to the OpenAI API with specific prompts to generate different content variations. These repurposed snippets are then saved as drafts in content management tools.\n\nResults:\nIncreased content output by 300% without additional writing effort, maintained a consistent brand voice across all platforms, and significantly boosted social media engagement.",
         technologyUsed: ["Zapier", "OpenAI API", "Google Docs", "Buffer"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing.jpg?raw=true",
+        images: [{
+          label: "Zapier AI Content Workflow",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing.jpg?raw=true"
+        }]
       },
       { 
         title: "CRM Workflow Automation in Asana", 
-        description: "Streamlined client onboarding by automatically creating tasks, subtasks, and Google Drive folders when leads reached specific stages in Asana.",
+        description: "Overview:\nStreamlined the entire client onboarding process by automating task creation, folder setup, and team notifications within Asana and Google Drive.\n\nProcess:\nA Zap triggers when a lead is moved to an 'Onboarding' stage. The workflow automatically creates a new project in Asana from a template, generates a client folder in Google Drive, and sends a confirmation notification in Slack.\n\nResults:\nReduced onboarding time by 90%, eliminated manual setup errors, and provided a consistent and professional experience for every new client.",
         technologyUsed: ["Zapier", "Asana", "Google Drive", "Slack"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20CRM%20Workflow%20Automation%20in%20Asana.jpg?raw=true",
+        images: [{
+          label: "Asana Onboarding Automation",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20CRM%20Workflow%20Automation%20in%20Asana.jpg?raw=true"
+        }]
       },
     ],
   },
@@ -174,15 +209,23 @@ const rawProjectData = [
     projects: [
       { 
         title: "Automated Xero to Asana CSV Export", 
-        description: "Pulled financial data from Xero and exported it to Asana in CSV format for team review, reducing manual data entry.",
+        description: "Overview:\nAutomated the process of exporting financial data from Xero and creating actionable tasks in Asana for team review.\n\nProcess:\nA Make scenario runs on a schedule to fetch new invoices from the Xero API. The data is compiled into a CSV file, uploaded to Google Drive, and a task is created in Asana with a link to the file, notifying the finance team.\n\nResults:\nEliminated manual data entry and report generation, ensured timely review of financial documents, and improved accuracy by removing the risk of human error.",
         technologyUsed: ["Make (Integromat)", "Xero API", "Asana", "Google Sheets"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export.jpg?raw=true",
+        images: [{
+          label: "Xero to Asana Workflow",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export.jpg?raw=true"
+        }]
       },
       { 
         title: "Automated Gmail Attachment Organizer for Google Drive", 
-        description: "Automatically scanned incoming Gmail attachments and organized them into categorized folders in Google Drive.",
+        description: "Overview:\nCreated an intelligent system to automatically scan incoming Gmail attachments and organize them into categorized folders within Google Drive.\n\nProcess:\nThe Make scenario watches for new emails with attachments. It uses filters to identify keywords (e.g., 'invoice,' 'report'). Based on these rules, it saves the attachment to the corresponding folder in Google Drive, renaming the file for consistency.\n\nResults:\nSaved countless hours of manual sorting, created a perfectly organized document repository, and prevented important files from being lost in the inbox.",
         technologyUsed: ["Make (Integromat)", "Gmail", "Google Drive"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive.jpg?raw=true",
+        images: [{
+          label: "Gmail to Drive Organizer",
+          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive.jpg?raw=true"
+        }]
       },
     ],
   },
@@ -332,7 +375,7 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
                           </span>
                         ))}
                       </div>
-                      <p className="text-lg text-text-secondary mb-8 leading-relaxed flex-grow">{project.description}</p>
+                      <p className="text-lg text-text-secondary mb-8 leading-relaxed flex-grow">{project.description.split('\n')[1]}</p>
                       <button
                         onClick={(e) => { e.stopPropagation(); onProjectClick(project); }}
                         className="bg-primary hover:bg-primary/90 text-background font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target self-start"

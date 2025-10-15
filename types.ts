@@ -1,5 +1,10 @@
 import type { ReactElement } from 'react';
 
+export interface ProjectImage {
+  label: string;
+  url: string;
+}
+
 export interface Skill {
   name: string;
 }
@@ -14,6 +19,7 @@ export interface Project {
   description: string;
   technologyUsed: string[];
   imageUrl: string;
+  images?: ProjectImage[];
 }
 
 export interface ProjectCategory {

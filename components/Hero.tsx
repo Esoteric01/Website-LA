@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { toolsData } from '../data/tools';
 
-interface HeroProps {
-  onKnowMoreClick: () => void;
-}
-
 const roles = [
   'AI Workflow Automation Specialist',
   'Process Optimization Expert',
   'Custom Integration Developer',
 ];
+
+interface HeroProps {
+  onKnowMoreClick: () => void;
+}
 
 const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
   const glowRef = useRef<HTMLDivElement>(null);
@@ -88,8 +88,8 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleScrollToContact = () => {
-    const element = document.getElementById('contact');
+  const handleScrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
       const headerOffset = 80; // Offset for the fixed header
       const elementPosition = element.getBoundingClientRect().top;
@@ -134,7 +134,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <button
-              onClick={handleScrollToContact}
+              onClick={() => handleScrollToSection('contact')}
               className="inline-block bg-primary hover:bg-primary/90 text-background font-bold py-4 px-10 rounded-lg transition-all duration-300 text-xl shadow-lg transform active:scale-95 hover:-translate-y-1 cursor-hover-target"
             >
               Let’s Automate Your Workflow

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { Project } from '../types';
 
 interface ProjectModalProps {
@@ -7,6 +8,13 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    // Reset image index when a new project is opened
+    setCurrentImageIndex(0);
+  }, [project]);
+
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -20,6 +28,23 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   }, [onClose]);
 
   if (!project) return null;
+  
+  const hasSlideshow = project.images && project.images.length > 0;
+  const imagesToShow = hasSlideshow ? project.images! : [{ url: project.imageUrl, label: project.title }];
+
+  const goToPrevious = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const isFirstImage = currentImageIndex === 0;
+    const newIndex = isFirstImage ? imagesToShow.length - 1 : currentImageIndex - 1;
+    setCurrentImageIndex(newIndex);
+  };
+
+  const goToNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const isLastImage = currentImageIndex === imagesToShow.length - 1;
+    const newIndex = isLastImage ? 0 : currentImageIndex + 1;
+    setCurrentImageIndex(newIndex);
+  };
 
   return (
     <div
@@ -34,7 +59,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-surface transition-colors z-10 cursor-hover-target"
+          className="absolute top-4 right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-surface transition-colors z-20 cursor-hover-target"
           aria-label="Close project details"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,12 +69,76 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         
         <div className="p-8 md:p-10">
           <h3 className="text-4xl font-bold font-display text-text-main mb-4 pr-8">{project.title}</h3>
-          <p className="text-xl text-primary leading-relaxed mb-8">
-            {project.description}
-          </p>
+          
+          {(() => {
+            // Check if the description contains structured headings.
+            const containsHeadings = /^(Overview:|Process:|Results:|🛠️ Process:|✅ Results:)/m.test(project.description);
+            
+            if (containsHeadings) {
+              return (
+                <div className="text-xl leading-relaxed mb-8 space-y-6">
+                  {project.description.split('\n\n').map((paragraph, index) => {
+                    const lines = paragraph.split('\n');
+                    const firstLine = lines[0];
+                    
+                    if (firstLine.includes(':')) {
+                      const [heading, ...contentStart] = firstLine.split(':');
+                      const restOfContent = lines.slice(1);
+                      const fullContent = [contentStart.join(':').trim(), ...restOfContent].join('\n');
+                      const cleanHeading = heading.replace('🛠️', '').replace('✅', '').trim();
+                      
+                      return (
+                        <div key={index}>
+                          <p className="font-bold text-primary">{cleanHeading}:</p>
+                          <p className="text-text-secondary">{fullContent}</p>
+                        </div>
+                      );
+                    }
 
-          <div className="my-8 rounded-lg overflow-hidden shadow-lg border border-border">
-             <img src={project.imageUrl} alt={project.title} className="w-full h-auto" loading="lazy" />
+                    return <p key={index} className="text-text-secondary">{paragraph}</p>;
+                  })}
+                </div>
+              );
+            }
+
+            return (
+              <p className="text-xl text-text-secondary leading-relaxed mb-8 whitespace-pre-line">
+                {project.description}
+              </p>
+            );
+          })()}
+
+          <div className="my-8 rounded-lg overflow-hidden shadow-lg border border-border relative">
+            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className="w-full h-auto object-contain" loading="lazy" />
+            
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10">
+                <p className="font-semibold text-sm">{imagesToShow[currentImageIndex].label}</p>
+            </div>
+            
+            {hasSlideshow && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs py-1 px-3 backdrop-blur-sm rounded-full z-10">
+                    {currentImageIndex + 1} / {imagesToShow.length}
+                </div>
+            )}
+
+            {hasSlideshow && imagesToShow.length > 1 && (
+              <>
+                <button
+                  onClick={goToPrevious}
+                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
+                  aria-label="Previous image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <button
+                  onClick={goToNext}
+                  className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
+                  aria-label="Next image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </button>
+              </>
+            )}
           </div>
 
           <div className="border-t border-border pt-6">

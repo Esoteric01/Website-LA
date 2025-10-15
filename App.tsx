@@ -15,7 +15,7 @@ import { Project } from './types';
 
 const App: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+  const [isAboutModalOpen, setAboutModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,9 +36,13 @@ const App: React.FC = () => {
     setSelectedProject(null);
   };
   
-  const handleOpenAboutModal = () => setIsAboutModalOpen(true);
-  const handleCloseAboutModal = () => setIsAboutModalOpen(false);
+  const handleKnowMoreClick = () => {
+    setAboutModalOpen(true);
+  };
 
+  const handleCloseAboutModal = () => {
+    setAboutModalOpen(false);
+  };
 
   return (
     <>
@@ -47,7 +51,7 @@ const App: React.FC = () => {
         <CustomCursor />
         <Header />
         <main className="max-w-8xl mx-auto px-4 md:px-8">
-          <Hero onKnowMoreClick={handleOpenAboutModal} />
+          <Hero onKnowMoreClick={handleKnowMoreClick} />
           <Services />
           <Skills />
           <Projects onProjectClick={handleProjectClick} />

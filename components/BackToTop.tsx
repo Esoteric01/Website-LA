@@ -2,14 +2,38 @@ import React, { useState, useEffect } from 'react';
 
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    const footer = document.getElementById('page-footer');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footer) {
+      observer.observe(footer);
     }
-  };
+
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+      if (footer) {
+        observer.unobserve(footer);
+      }
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -18,15 +42,8 @@ const BackToTop: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  }, []);
-
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className={`fixed right-8 z-50 transition-all duration-300 ${isFooterVisible ? 'bottom-28 md:bottom-24' : 'bottom-8'}`}>
       {isVisible && (
         <button
           onClick={scrollToTop}

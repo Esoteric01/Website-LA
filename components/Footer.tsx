@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icons } from '../constants';
 
 const Footer: React.FC = () => {
   
@@ -10,9 +9,21 @@ const Footer: React.FC = () => {
   ];
 
   const socialLinks = [
-    { icon: <Icons.LinkedIn />, text: 'LinkedIn', href: 'https://www.linkedin.com/in/la-almerino-2873aa155/' },
-    { icon: <Icons.Upwork />, text: 'Upwork', href: 'https://www.upwork.com/freelancers/~01dfae3bcba7fd3a41?mp_source=share' },
-    { icon: <Icons.OnlineJobs />, text: 'OnlineJobs.ph', href: 'https://www.onlinejobs.ph/jobseekers/info/1993414' },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/la-almerino-2873aa155/',
+      imageUrl: 'https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Footer%20Section%20Images/linkedin.webp?raw=true',
+    },
+    {
+      name: 'Upwork',
+      href: 'https://www.upwork.com/freelancers/~01dfae3bcba7fd3a41?mp_source=share',
+      imageUrl: 'https://raw.githubusercontent.com/Esoteric01/loizalmerino.com-assets/238f7d996b86a577ef74334fb5385d715e8bbe82/Footer%20Section%20Images/upwork.svg',
+    },
+    {
+      name: 'OnlineJobs.ph',
+      href: 'https://www.onlinejobs.ph/jobseekers/info/1993414',
+      imageUrl: 'https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Footer%20Section%20Images/onlinejobsph.png?raw=true',
+    },
   ];
 
   const scrollToSection = (id: string) => {
@@ -20,7 +31,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-border">
+    <footer id="page-footer" className="border-t border-border">
       <div className="max-w-8xl mx-auto px-4 md:px-8 py-8 text-text-secondary">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
@@ -34,11 +45,19 @@ const Footer: React.FC = () => {
                     </button>
                 ))}
             </div>
-             <div className="flex items-center justify-center space-x-6">
-                {socialLinks.map((link, index) => (
-                <a key={index} href={link.href} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors duration-300 cursor-hover-target" aria-label={link.text}>
-                    {link.icon}
-                </a>
+             <div className="flex flex-col items-center md:items-start gap-y-3 text-text-secondary">
+                {socialLinks.map(({ name, href, imageUrl }) => (
+                    <a 
+                        key={name}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Visit my ${name} profile`}
+                        className="flex items-center gap-3 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-hover-target"
+                    >
+                        <img src={imageUrl} alt={`${name} logo`} className="h-5 w-5 object-contain" />
+                        <p className="text-base font-normal text-text-main">{name}</p>
+                    </a>
                 ))}
             </div>
         </div>

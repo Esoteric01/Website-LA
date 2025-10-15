@@ -150,7 +150,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
 
         {/* Right Column: Image & Logos */}
         <div ref={imageRef} className="md:w-2/5 flex flex-col items-center justify-center flex-shrink-0" style={{ willChange: 'transform' }}>
-          <div className="relative w-80 h-80 md:w-[28rem] md:h-[28rem] mb-6">
+          <div className="relative w-80 h-80 md:w-[28rem] md:h-[28rem] mb-4">
             <div 
               className="absolute inset-0 rounded-full animate-rotate"
               style={{

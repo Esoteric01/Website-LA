@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
             </button>
             <button
               onClick={onKnowMoreClick}
-              className="inline-block bg-surface hover:bg-border border border-border text-text-main font-bold py-4 px-10 rounded-lg transition-all duration-300 text-xl transform active:scale-95 hover:-translate-y-1 cursor-hover-target"
+              className="inline-block bg-text-main hover:bg-primary hover:text-background border border-primary text-background font-bold py-4 px-10 rounded-lg transition-all duration-300 text-xl transform active:scale-95 hover:-translate-y-1 cursor-hover-target"
             >
               Know Me More
             </button>

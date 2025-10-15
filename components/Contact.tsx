@@ -133,7 +133,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form Card */}
-          <div ref={rightColRef} className={`bg-surface rounded-2xl p-8 md:p-10 border border-primary shadow-2xl ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', willChange: 'transform' }}>
+          <div ref={rightColRef} className={`bg-surface rounded-2xl p-8 md:p-10 border border-border shadow-2xl ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', willChange: 'transform' }}>
             <h3 className="text-3xl font-bold font-display text-text-main mb-6">Send me a message</h3>
             <form
               action="mailto:loizalmerino@gmail.com"

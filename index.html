@@ -31,6 +31,8 @@
               'fade-in': 'fadeIn 0.5s ease-out forwards',
               'slide': 'slide 60s linear infinite',
               'slide-reverse': 'slide-reverse 60s linear infinite',
+              'rotate': 'rotate 10s linear infinite',
+              'blink': 'blink 0.7s step-end infinite',
             },
             keyframes: {
               fadeInUp: {
@@ -48,6 +50,13 @@
               'slide-reverse': {
                 'from': { transform: 'translateX(-50%)' },
                 'to': { transform: 'translateX(0)' },
+              },
+              rotate: {
+                'from': { transform: 'rotate(0deg)' },
+                'to': { transform: 'rotate(360deg)' },
+              },
+              blink: {
+                '50%': { opacity: '0' },
               },
             },
             backgroundImage: {

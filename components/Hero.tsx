@@ -1,13 +1,57 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { toolsData } from '../data/tools';
 
 interface HeroProps {
   onKnowMoreClick: () => void;
 }
 
+const roles = [
+  'AI Workflow Automation Specialist',
+  'Process Optimization Expert',
+  'Custom Integration Developer',
+];
+
 const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
   const glowRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const zapierTool = toolsData.find(tool => tool.name === 'Zapier');
+  const makeTool = toolsData.find(tool => tool.name === 'Make (Integromat)');
+  const n8nTool = toolsData.find(tool => tool.name === 'n8n');
+  
+  const coreTools = [
+    { tool: zapierTool, name: 'Zapier' },
+    { tool: makeTool, name: 'Make.com' },
+    { tool: n8nTool, name: 'n8n' },
+  ].filter(item => item.tool);
+
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const fullText = roles[roleIndex];
+      setCurrentText(
+        isDeleting
+          ? fullText.substring(0, currentText.length - 1)
+          : fullText.substring(0, currentText.length + 1)
+      );
+
+      if (!isDeleting && currentText === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000); // Pause before deleting
+      } else if (isDeleting && currentText === '') {
+        setIsDeleting(false);
+        setRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
+      }
+    };
+    
+    const typingSpeed = isDeleting ? 75 : 150;
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, roleIndex]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,14 +114,23 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
       >
       </div>
 
-      <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16 w-full z-10">
+      <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-12 md:gap-16 w-full z-10">
         {/* Left Column: Text Content */}
         <div ref={contentRef} className="md:w-3/5 text-center md:text-left" style={{ willChange: 'transform' }}>
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-display text-text-main mb-4">Hey, I'm Loiz Almerino</h1>
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-primary mb-6">AI Workflow Automation Specialist</h2>
-          <p className="text-lg md:text-xl lg:text-2xl leading-loose text-text-main mb-8 max-w-3xl mx-auto md:mx-0">
-            I help businesses streamline operations and boost efficiency through smart automation. With a background in network engineering and systems administration, I deliver solutions that are not just efficient, but also secure, scalable, and enterprise-ready.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-primary mb-8 h-20 md:h-12">
+            {currentText}
+            <span className="text-primary animate-blink">|</span>
+          </h2>
+          
+          <div className="mb-8 max-w-3xl mx-auto md:mx-0 space-y-4">
+            <p className="text-xl md:text-2xl font-semibold text-text-main">
+              I Build Smart Automations That Save Time and Boost Productivity
+            </p>
+            <p className="text-lg md:text-xl leading-loose text-text-secondary">
+              I design simple, scalable solutions that let businesses work smarter, reduce errors, and focus on what truly matters.
+            </p>
+          </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <button
@@ -95,13 +148,41 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
           </div>
         </div>
 
-        {/* Right Column: Image */}
-        <div ref={imageRef} className="md:w-2/5 flex justify-center flex-shrink-0" style={{ willChange: 'transform' }}>
-          <img 
-            src="https://github.com/Esoteric01/Portfolio-Images/blob/main/Formal.jpg?raw=true"
-            alt="Portrait of Loiz Almerino"
-            className="rounded-full w-80 h-80 md:w-[28rem] md:h-[28rem] object-cover ring-2 ring-primary transition-all duration-500"
-          />
+        {/* Right Column: Image & Logos */}
+        <div ref={imageRef} className="md:w-2/5 flex flex-col items-center justify-center flex-shrink-0" style={{ willChange: 'transform' }}>
+          <div className="relative w-80 h-80 md:w-[28rem] md:h-[28rem] mb-6">
+            <div 
+              className="absolute inset-0 rounded-full animate-rotate"
+              style={{
+                background: 'conic-gradient(from 0deg, transparent 0%, transparent 75%, #00C46A 100%)'
+              }}
+              aria-hidden="true"
+            />
+            <img 
+              src="https://github.com/Esoteric01/Portfolio-Images/blob/main/Formal.jpg?raw=true"
+              alt="Portrait of Loiz Almerino"
+              className="relative rounded-full w-full h-full object-cover ring-2 ring-primary/50"
+            />
+          </div>
+
+          <div className="group cursor-hover-target rounded-lg p-2 -m-2">
+            <div 
+              className="flex items-center justify-center gap-x-2 text-text-secondary motion-safe:animate-fade-in grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" 
+              style={{ animationDelay: '300ms' }}
+            >
+              {coreTools.map(({ tool, name }, index) => (
+                <React.Fragment key={name}>
+                    <div className="flex items-center gap-1.5">
+                        <div className={`${name === 'n8n' ? 'h-4' : 'h-5'} w-auto text-white`}>{tool!.icon}</div>
+                        <p className="text-base font-semibold text-text-main">{name}</p>
+                    </div>
+                    {index < coreTools.length - 1 && (
+                        <span className="text-base text-border select-none" aria-hidden="true">|</span>
+                    )}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

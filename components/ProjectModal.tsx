@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState, useCallback } from 'react';
+
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Project } from '../types';
 
 interface ProjectModalProps {
@@ -7,10 +8,25 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+const FullscreenEnterIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m0 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5h-4m0 0v-4m0 4l-5-5" />
+  </svg>
+);
+
+const FullscreenExitIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 4H4v4m4-4l-5 5m13-5h4v4m-4-4l5 5M8 20H4v-4m4 4l-5-5m13 5h4v-4m-4 4l5-5" />
+  </svg>
+);
+
+
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
   const [show, setShow] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const slideshowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (project) {
@@ -21,6 +37,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   }, [project]);
 
   const handleClose = useCallback(() => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
     setIsClosing(true);
     setTimeout(() => {
       setShow(false);
@@ -29,9 +48,24 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   }, [onClose]);
 
   useEffect(() => {
+    const handleFullscreenChange = () => {
+        const isFs = !!document.fullscreenElement;
+        setIsFullscreen(isFs);
+        // FIX: Cast screen.orientation to any to access the experimental 'unlock' method.
+        if (!isFs && screen.orientation && typeof (screen.orientation as any).unlock === 'function') {
+            (screen.orientation as any).unlock();
+        }
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        handleClose();
+        if (!document.fullscreenElement) {
+             handleClose();
+        }
       }
     };
     if (show) {
@@ -60,6 +94,27 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     const isLastImage = currentImageIndex === imagesToShow.length - 1;
     const newIndex = isLastImage ? 0 : currentImageIndex + 1;
     setCurrentImageIndex(newIndex);
+  };
+
+  const toggleFullscreen = async () => {
+    const elem = slideshowRef.current;
+    if (!elem) return;
+
+    if (!document.fullscreenElement) {
+        try {
+            await elem.requestFullscreen();
+            // FIX: Cast screen.orientation to any to access the experimental 'lock' method.
+            if (screen.orientation && typeof (screen.orientation as any).lock === 'function') {
+                await (screen.orientation as any).lock('landscape').catch(err => console.log("Orientation lock failed:", err));
+            }
+        } catch (err) {
+            console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        }
+    } else {
+        if (document.exitFullscreen) {
+            await document.exitFullscreen();
+        }
+    }
   };
 
   return (
@@ -124,8 +179,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             );
           })()}
 
-          <div className="my-8 rounded-lg overflow-hidden shadow-lg border border-border relative">
-            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className="w-full h-auto object-contain" loading="lazy" />
+          <div
+            ref={slideshowRef}
+            className={`my-8 rounded-lg overflow-hidden shadow-lg border border-border relative bg-background ${isFullscreen ? 'flex items-center justify-center' : ''}`}
+          >
+            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className={`w-full h-auto object-contain ${isFullscreen ? 'max-h-screen' : 'max-h-[60vh]'}`} loading="lazy" />
             
             <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10">
                 <p className="font-semibold text-sm">{imagesToShow[currentImageIndex].label}</p>
@@ -155,6 +213,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 </button>
               </>
             )}
+
+            <button
+                onClick={toggleFullscreen}
+                className="absolute top-2 right-2 md:hidden z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
+                aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            >
+                {isFullscreen ? <FullscreenExitIcon /> : <FullscreenEnterIcon />}
+            </button>
           </div>
 
           <div className="border-t border-border pt-6">

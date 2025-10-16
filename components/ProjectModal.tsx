@@ -155,18 +155,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-background/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+      className={`fixed inset-0 bg-background/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
       onClick={handleClose}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className={`bg-surface rounded-xl shadow-2xl w-full max-w-[85vw] transform border border-border relative overflow-y-auto max-h-[90vh] ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
+        className={`bg-surface rounded-xl shadow-2xl w-full max-w-4xl transform border border-border relative overflow-y-auto max-h-[90vh] ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-surface transition-colors z-20 cursor-hover-target"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-surface transition-colors z-20 cursor-hover-target"
           aria-label="Close project details"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -174,14 +174,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           </svg>
         </button>
         
-        <div className="p-8 md:p-10">
-          <h3 className="text-4xl font-bold font-display text-text-main mb-4 pr-8 leading-snug">{project.title}</h3>
+        <div className="p-4 sm:p-6 md:p-8">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-text-main mb-4 pr-8 leading-snug">{project.title}</h3>
           
           {(() => {
             const containsHeadings = /^(Overview:|Process:|Results:|🛠️ Process:|✅ Results:)/m.test(project.description);
             if (containsHeadings) {
               return (
-                <div className="text-lg leading-relaxed mb-8 space-y-6">
+                <div className="text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 space-y-4 sm:space-y-6">
                   {project.description.split('\n\n').map((paragraph, index) => {
                     const lines = paragraph.split('\n');
                     const firstLine = lines[0];
@@ -192,7 +192,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                       const cleanHeading = heading.replace('🛠️', '').replace('✅', '').trim();
                       return (
                         <div key={index}>
-                          <p className="font-bold text-primary text-lg">{cleanHeading}:</p>
+                          <p className="font-bold text-primary text-base sm:text-lg">{cleanHeading}:</p>
                           <p className="text-text-secondary">{fullContent}</p>
                         </div>
                       );
@@ -203,7 +203,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               );
             }
             return (
-              <p className="text-lg text-text-secondary leading-relaxed mb-8 whitespace-pre-line">
+              <p className="text-base sm:text-lg text-text-secondary leading-relaxed mb-6 sm:mb-8 whitespace-pre-line">
                 {project.description}
               </p>
             );
@@ -211,14 +211,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
           <div
             ref={slideshowRef}
-            className={`my-8 rounded-lg overflow-hidden shadow-lg border border-border relative bg-background ${isFullscreen ? 'flex items-center justify-center' : ''}`}
+            className={`my-6 sm:my-8 rounded-lg overflow-hidden shadow-lg border border-border relative bg-background group ${isFullscreen ? 'flex items-center justify-center' : ''}`}
             onTouchStart={isFullscreen && hasSlideshow ? onTouchStart : undefined}
             onTouchMove={isFullscreen && hasSlideshow ? onTouchMove : undefined}
             onTouchEnd={isFullscreen && hasSlideshow ? onTouchEnd : undefined}
           >
-            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className={`w-full h-auto object-contain transition-opacity duration-300 ${isFullscreen ? 'max-h-screen' : 'max-h-[60vh]'}`} loading="lazy" />
+            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className={`w-full h-auto object-contain transition-opacity duration-300 ${isFullscreen ? 'max-h-screen' : 'max-h-[45vh] md:max-h-[60vh]'}`} loading="lazy" />
             
-            <div className={`absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10 transition-opacity duration-300 ${isFullscreen ? 'opacity-0 group-hover:opacity-100' : ''}`}>
+            <div className={`absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10 transition-opacity duration-300 ${!isFullscreen ? 'hidden' : 'opacity-0 group-hover:opacity-100'}`}>
                 <p className="font-semibold text-sm">{imagesToShow[currentImageIndex].label}</p>
             </div>
             
@@ -232,14 +232,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               <>
                 <button
                   onClick={(e) => {e.stopPropagation(); goToPrevious()}}
-                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
+                  className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-all duration-300 cursor-hover-target backdrop-blur-sm ${isFullscreen ? 'opacity-0 group-hover:opacity-100' : ''}`}
                   aria-label="Previous image"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 <button
                   onClick={(e) => {e.stopPropagation(); goToNext()}}
-                  className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
+                  className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-all duration-300 cursor-hover-target backdrop-blur-sm ${isFullscreen ? 'opacity-0 group-hover:opacity-100' : ''}`}
                   aria-label="Next image"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -256,11 +256,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </button>
           </div>
 
-          <div className="border-t border-border pt-6">
-              <h4 className="font-semibold text-text-main mb-4 text-lg">Technology Used:</h4>
-              <div className="flex flex-wrap gap-3">
+          <div className="border-t border-border pt-4 sm:pt-6">
+              <h4 className="font-semibold text-text-main mb-4 text-base sm:text-lg">Technology Used:</h4>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                   {project.technologyUsed.map((tech, index) => (
-                  <span key={index} className="border border-primary text-primary text-base font-medium px-4 py-2 rounded-full">
+                  <span key={index} className="border border-primary text-primary text-sm font-medium px-3 py-1.5 rounded-full">
                       {tech}
                   </span>
                   ))}

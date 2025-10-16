@@ -13,9 +13,9 @@ const FullscreenEnterIcon = () => (
   </svg>
 );
 
-const FullscreenExitIcon = () => (
+const XIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 4H4v4m4-4l-5 5m13-5h4v4m-4-4l5 5M8 20H4v-4m4 4l-5-5m13 5h4v-4m-4 4l5-5" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
   </svg>
 );
 
@@ -248,11 +248,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             )}
 
             <button
-                onClick={toggleFullscreen}
-                className="absolute top-2 right-2 md:hidden z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
+                onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
+                className="absolute top-4 right-4 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
                 aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
-                {isFullscreen ? <FullscreenExitIcon /> : <FullscreenEnterIcon />}
+                {isFullscreen ? <XIcon /> : <FullscreenEnterIcon />}
             </button>
           </div>
 

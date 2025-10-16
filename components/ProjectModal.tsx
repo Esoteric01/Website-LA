@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Project } from '../types';
 
@@ -27,6 +26,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const [show, setShow] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const slideshowRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   useEffect(() => {
     if (project) {
@@ -36,22 +37,40 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     }
   }, [project]);
 
-  const handleClose = useCallback(() => {
+  const imagesToShow = project?.images && project.images.length > 0
+    ? project.images
+    : (project ? [{ url: project.imageUrl, label: project.title }] : []);
+
+  const goToPrevious = useCallback(() => {
+    const isFirstImage = currentImageIndex === 0;
+    const newIndex = isFirstImage ? imagesToShow.length - 1 : currentImageIndex - 1;
+    setCurrentImageIndex(newIndex);
+  }, [currentImageIndex, imagesToShow.length]);
+
+  const goToNext = useCallback(() => {
+    const isLastImage = currentImageIndex === imagesToShow.length - 1;
+    const newIndex = isLastImage ? 0 : currentImageIndex + 1;
+    setCurrentImageIndex(newIndex);
+  }, [currentImageIndex, imagesToShow.length]);
+
+  const handleClose = useCallback(async () => {
     if (document.fullscreenElement) {
-        document.exitFullscreen();
+        if (screen.orientation && typeof (screen.orientation as any).unlock === 'function') {
+            (screen.orientation as any).unlock();
+        }
+        await document.exitFullscreen();
     }
     setIsClosing(true);
     setTimeout(() => {
       setShow(false);
       onClose();
-    }, 300); // Corresponds to animation duration
+    }, 300);
   }, [onClose]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
         const isFs = !!document.fullscreenElement;
         setIsFullscreen(isFs);
-        // FIX: Cast screen.orientation to any to access the experimental 'unlock' method.
         if (!isFs && screen.orientation && typeof (screen.orientation as any).unlock === 'function') {
             (screen.orientation as any).unlock();
         }
@@ -61,40 +80,28 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   }, []);
 
   useEffect(() => {
-    const handleEsc = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!show) return;
       if (event.key === 'Escape') {
         if (!document.fullscreenElement) {
              handleClose();
         }
       }
+      if (project?.images && project.images.length > 1) {
+          if (event.key === 'ArrowLeft') goToPrevious();
+          if (event.key === 'ArrowRight') goToNext();
+      }
     };
-    if (show) {
-      window.addEventListener('keydown', handleEsc);
-    }
+    
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleEsc);
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [show, handleClose]);
+  }, [show, handleClose, project, goToPrevious, goToNext]);
 
-  if (!show) return null;
-  if (!project) return null; // Keep project data during closing animation
+  if (!show || !project) return null;
   
   const hasSlideshow = project.images && project.images.length > 0;
-  const imagesToShow = hasSlideshow ? project.images! : [{ url: project.imageUrl, label: project.title }];
-
-  const goToPrevious = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const isFirstImage = currentImageIndex === 0;
-    const newIndex = isFirstImage ? imagesToShow.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-  };
-
-  const goToNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const isLastImage = currentImageIndex === imagesToShow.length - 1;
-    const newIndex = isLastImage ? 0 : currentImageIndex + 1;
-    setCurrentImageIndex(newIndex);
-  };
 
   const toggleFullscreen = async () => {
     const elem = slideshowRef.current;
@@ -103,18 +110,47 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     if (!document.fullscreenElement) {
         try {
             await elem.requestFullscreen();
-            // FIX: Cast screen.orientation to any to access the experimental 'lock' method.
-            if (screen.orientation && typeof (screen.orientation as any).lock === 'function') {
-                await (screen.orientation as any).lock('landscape').catch(err => console.log("Orientation lock failed:", err));
+            if (window.matchMedia("(pointer: coarse)").matches && screen.orientation && typeof (screen.orientation as any).lock === 'function') {
+                await (screen.orientation as any).lock('landscape').catch((err: any) => console.warn("Orientation lock failed:", err));
             }
-        } catch (err) {
+        } catch (err: any) {
             console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
         }
     } else {
+        if (screen.orientation && typeof (screen.orientation as any).unlock === 'function') {
+            (screen.orientation as any).unlock();
+        }
         if (document.exitFullscreen) {
             await document.exitFullscreen();
         }
     }
+  };
+  
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchEndX.current = null;
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
+    }
+    
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   return (
@@ -142,22 +178,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           <h3 className="text-4xl font-bold font-display text-text-main mb-4 pr-8 leading-snug">{project.title}</h3>
           
           {(() => {
-            // Check if the description contains structured headings.
             const containsHeadings = /^(Overview:|Process:|Results:|🛠️ Process:|✅ Results:)/m.test(project.description);
-            
             if (containsHeadings) {
               return (
                 <div className="text-lg leading-relaxed mb-8 space-y-6">
                   {project.description.split('\n\n').map((paragraph, index) => {
                     const lines = paragraph.split('\n');
                     const firstLine = lines[0];
-                    
                     if (firstLine.includes(':')) {
                       const [heading, ...contentStart] = firstLine.split(':');
                       const restOfContent = lines.slice(1);
                       const fullContent = [contentStart.join(':').trim(), ...restOfContent].join('\n');
                       const cleanHeading = heading.replace('🛠️', '').replace('✅', '').trim();
-                      
                       return (
                         <div key={index}>
                           <p className="font-bold text-primary text-lg">{cleanHeading}:</p>
@@ -165,13 +197,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                         </div>
                       );
                     }
-
                     return <p key={index} className="text-text-secondary">{paragraph}</p>;
                   })}
                 </div>
               );
             }
-
             return (
               <p className="text-lg text-text-secondary leading-relaxed mb-8 whitespace-pre-line">
                 {project.description}
@@ -182,15 +212,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           <div
             ref={slideshowRef}
             className={`my-8 rounded-lg overflow-hidden shadow-lg border border-border relative bg-background ${isFullscreen ? 'flex items-center justify-center' : ''}`}
+            onTouchStart={isFullscreen && hasSlideshow ? onTouchStart : undefined}
+            onTouchMove={isFullscreen && hasSlideshow ? onTouchMove : undefined}
+            onTouchEnd={isFullscreen && hasSlideshow ? onTouchEnd : undefined}
           >
-            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className={`w-full h-auto object-contain ${isFullscreen ? 'max-h-screen' : 'max-h-[60vh]'}`} loading="lazy" />
+            <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className={`w-full h-auto object-contain transition-opacity duration-300 ${isFullscreen ? 'max-h-screen' : 'max-h-[60vh]'}`} loading="lazy" />
             
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10">
+            <div className={`absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10 transition-opacity duration-300 ${isFullscreen ? 'opacity-0 group-hover:opacity-100' : ''}`}>
                 <p className="font-semibold text-sm">{imagesToShow[currentImageIndex].label}</p>
             </div>
             
             {hasSlideshow && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs py-1 px-3 backdrop-blur-sm rounded-full z-10">
+                <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs py-1 px-3 backdrop-blur-sm rounded-full z-10 transition-opacity duration-300 ${isFullscreen ? 'opacity-0 group-hover:opacity-100' : ''}`}>
                     {currentImageIndex + 1} / {imagesToShow.length}
                 </div>
             )}
@@ -198,14 +231,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             {hasSlideshow && imagesToShow.length > 1 && (
               <>
                 <button
-                  onClick={goToPrevious}
+                  onClick={(e) => {e.stopPropagation(); goToPrevious()}}
                   className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
                   aria-label="Previous image"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 <button
-                  onClick={goToNext}
+                  onClick={(e) => {e.stopPropagation(); goToNext()}}
                   className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-surface/50 text-text-main rounded-full p-2 hover:bg-surface transition-colors cursor-hover-target backdrop-blur-sm"
                   aria-label="Next image"
                 >

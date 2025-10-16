@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -359,8 +360,8 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
   return (
     <section ref={sectionRef} id="projects" className="py-20 md:py-28">
       <div className={`text-center mb-12 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
-        <h2 className="text-5xl sm:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">Automation Projects</h2>
-        <p className="max-w-3xl mx-auto text-2xl text-primary">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">Automation Projects</h2>
+        <p className="max-w-3xl mx-auto text-xl md:text-2xl text-primary">
           A collection of automation builds powered by AI and integration tools.
         </p>
       </div>
@@ -396,7 +397,7 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
                   <div 
                     onClick={() => onProjectClick(project)}
                     onMouseMove={handleMouseMove}
-                    className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-x-8 gap-y-8 relative overflow-hidden bg-surface rounded-2xl p-8 border border-border transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target"
+                    className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-x-8 gap-y-8 relative overflow-hidden bg-surface rounded-2xl p-6 md:p-8 border border-border transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target"
                   >
                     <div 
                         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -407,7 +408,7 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
                     {/* Text Content Column */}
                     <div className="lg:col-span-5 flex flex-col h-full relative">
                       <div className="w-10 h-10 mb-4 text-primary">{activeCategory.icon}</div>
-                      <h3 className="text-3xl font-bold font-display text-text-main mb-4 leading-snug">{project.title}</h3>
+                      <h3 className="text-2xl md:text-3xl font-bold font-display text-text-main mb-4 leading-snug">{project.title}</h3>
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.technologyUsed.map((tech, index) => (
                           <span key={index} className="border border-primary text-primary text-sm font-medium px-3 py-1.5 rounded-full">
@@ -415,7 +416,7 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
                           </span>
                         ))}
                       </div>
-                      <p className="text-lg text-text-secondary mb-8 leading-relaxed flex-grow">{project.description.split('\n')[1]}</p>
+                      <p className="text-base md:text-lg text-text-secondary mb-8 leading-relaxed flex-grow">{project.description.split('\n')[1]}</p>
                       <button
                         onClick={(e) => { e.stopPropagation(); onProjectClick(project); }}
                         className="bg-primary hover:bg-primary/90 text-background font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target self-start"

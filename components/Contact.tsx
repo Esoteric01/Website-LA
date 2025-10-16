@@ -79,30 +79,30 @@ const Contact: React.FC = () => {
           
           {/* Left Column: Info & CTA */}
           <div ref={leftColRef} style={{ willChange: 'transform' }} className={`lg:pr-8 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
-            <h2 className="text-5xl sm:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">
+            <h2 className="text-center lg:text-left text-5xl sm:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">
               Ready to build your automated future?
             </h2>
-            <p className="max-w-2xl text-xl text-primary mb-8">
+            <p className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left text-xl text-primary mb-8">
               Let's connect. I'm here to help you streamline operations, boost efficiency, and unlock your business's full potential.
             </p>
 
             <div className="space-y-6">
                 <div>
-                    <h3 className="text-3xl font-bold font-display text-text-main mb-4 leading-snug">Other ways to connect</h3>
+                    <h3 className="text-center lg:text-left text-3xl font-bold font-display text-text-main mb-4 leading-snug">Other ways to connect</h3>
                     <div className="space-y-4">
-                        <div className="flex items-center gap-4 text-lg text-primary">
+                        <div className="flex items-center justify-center lg:justify-start gap-4 text-lg text-primary">
                             <div className="bg-surface p-3 rounded-lg border border-primary/50"><Icons.IconMail /></div>
                             <span>loizalmerino@gmail.com</span>
                         </div>
-                        <div className="flex items-center gap-4 text-lg text-primary">
+                        <div className="flex items-center justify-center lg:justify-start gap-4 text-lg text-primary">
                             <div className="bg-surface p-3 rounded-lg border border-primary/50"><Icons.IconPhone /></div>
                             <span>09219173684</span>
                         </div>
                     </div>
                 </div>
                  <div>
-                    <h3 className="text-3xl font-bold font-display text-text-main mb-4 leading-snug">Find me on</h3>
-                    <div className="flex flex-wrap gap-4">
+                    <h3 className="text-center lg:text-left text-3xl font-bold font-display text-text-main mb-4 leading-snug">Find me on</h3>
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                          <a 
                             href="https://www.linkedin.com/in/la-almerino-2873aa155/" 
                             target="_blank" 
@@ -142,7 +142,7 @@ const Contact: React.FC = () => {
               marginHeight={0}
               marginWidth={0}
               title="Project Inquiry Form"
-              className="rounded-2xl min-h-[700px] lg:min-h-0"
+              className="rounded-2xl min-h-[700px] lg:min-h-0 border-2 border-primary ring-2 ring-white"
               style={{ filter: 'invert(92%) hue-rotate(180deg) brightness(1.1) contrast(0.95)' }}
             >
               Loading…

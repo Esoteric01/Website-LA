@@ -103,7 +103,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center motion-safe:animate-fade-in-up relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-start lg:items-center pt-24 lg:pt-0 motion-safe:animate-fade-in-up relative overflow-hidden">
       <div 
         ref={glowRef}
         className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[80vh] w-[150%] max-w-[1200px]"
@@ -114,16 +114,16 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
       >
       </div>
 
-      <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-12 md:gap-16 w-full z-10">
+      <div className="flex flex-col-reverse lg:flex-row items-center lg:items-center gap-12 lg:gap-16 w-full z-10">
         {/* Left Column: Text Content */}
-        <div ref={contentRef} className="md:w-3/5 text-center md:text-left" style={{ willChange: 'transform' }}>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-display text-text-main mb-4 tracking-tighter">Hey, I'm Loiz Almerino</h1>
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-primary mb-8 h-20 md:h-12">
+        <div ref={contentRef} className="lg:w-3/5 text-center lg:text-left" style={{ willChange: 'transform' }}>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black font-display text-text-main mb-4 tracking-tighter">Hey, I'm Loiz Almerino</h1>
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-primary mb-8 h-20 lg:h-12">
             {currentText}
             <span className="text-primary animate-blink">|</span>
           </h2>
           
-          <div className="mb-8 max-w-3xl mx-auto md:mx-0 space-y-4">
+          <div className="mb-8 max-w-3xl mx-auto lg:mx-0 space-y-4">
             <p className="text-xl md:text-2xl font-semibold text-text-main leading-snug">
               I Build Smart Automations That Save Time and Boost Productivity
             </p>
@@ -132,7 +132,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <button
               onClick={() => handleScrollToSection('contact')}
               className="inline-block bg-primary hover:bg-primary/90 text-background font-bold py-4 px-10 rounded-lg transition-all duration-300 text-xl shadow-lg transform active:scale-95 hover:-translate-y-1 cursor-hover-target"
@@ -149,8 +149,8 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
         </div>
 
         {/* Right Column: Image & Logos */}
-        <div ref={imageRef} className="md:w-2/5 flex flex-col items-center justify-center flex-shrink-0" style={{ willChange: 'transform' }}>
-          <div className="relative w-80 h-80 md:w-[28rem] md:h-[28rem] mb-4">
+        <div ref={imageRef} className="lg:w-2/5 flex flex-col items-center justify-center flex-shrink-0" style={{ willChange: 'transform' }}>
+          <div className="relative w-80 h-80 lg:w-[28rem] lg:h-[28rem] mb-4">
             <div 
               className="absolute inset-0 rounded-full animate-rotate"
               style={{

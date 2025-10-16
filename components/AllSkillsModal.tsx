@@ -58,12 +58,12 @@ const AllSkillsModal: React.FC<AllSkillsModalProps> = ({ isOpen, onClose, tools 
       role="dialog"
     >
       <div
-        className={`bg-surface rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] relative border border-border flex flex-col ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
+        className={`bg-surface rounded-xl shadow-2xl w-full max-w-5xl h-[90vh] relative border border-border flex flex-col ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-8 pb-4">
-            <h3 className="text-4xl font-bold font-display text-text-main text-center leading-snug">My Automation Stack</h3>
-            <p className="text-xl text-primary mt-2 text-center max-w-2xl mx-auto">An interactive overview of the tools I use to bring automation projects to life.</p>
+        <div className="p-6 md:p-8 pb-4">
+            <h3 className="text-3xl sm:text-4xl font-bold font-display text-text-main text-center leading-snug">My Automation Stack</h3>
+            <p className="text-lg sm:text-xl text-primary mt-2 text-center max-w-2xl mx-auto">An interactive overview of the tools I use to bring automation projects to life.</p>
         </div>
         
         <div className="flex justify-center flex-wrap gap-2 mb-6 p-4 sticky top-0 bg-surface/80 backdrop-blur-sm z-10 border-b border-border">
@@ -82,17 +82,17 @@ const AllSkillsModal: React.FC<AllSkillsModalProps> = ({ isOpen, onClose, tools 
           ))}
         </div>
 
-        <div className="overflow-y-auto px-8 pb-8">
+        <div className="overflow-y-auto px-6 md:px-8 pb-8 flex-1">
             <div key={activeCategory} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTools.map((tool, index) => (
                 <div
                 key={tool.name}
-                className="group bg-background/50 rounded-xl p-6 border border-border transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_20px_rgba(0,196,106,0.15)] motion-safe:hover:-translate-y-1.5 cursor-hover-target animate-fade-in-up flex flex-col"
+                className="group bg-background/50 rounded-xl p-4 md:p-6 border border-border transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_20px_rgba(0,196,106,0.15)] motion-safe:hover:-translate-y-1.5 cursor-hover-target animate-fade-in-up flex flex-col"
                 style={{ animationDelay: `${index * 50}ms` }}
                 >
                     <div className="flex items-center gap-4 mb-3">
-                        <div className="flex-shrink-0 w-10 h-10 text-text-main">{tool.icon}</div>
-                        <p className="font-bold text-text-main text-lg">{tool.name}</p>
+                        <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 text-text-main">{tool.icon}</div>
+                        <p className="font-bold text-text-main md:text-lg">{tool.name}</p>
                     </div>
                     <p className="text-text-secondary text-base flex-grow">{tool.description}</p>
                 </div>

@@ -126,20 +126,20 @@ const Services: React.FC = () => {
           <div
             key={index}
             ref={el => cardRefs.current[index] = el}
-            className={`flex flex-col bg-surface border border-border rounded-2xl p-8 transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}
+            className={`flex flex-col bg-surface border border-border rounded-2xl p-6 lg:p-8 transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}
             style={{ animationDelay: `${index * 150}ms`, willChange: 'transform' }}
           >
-            <div className="h-14 w-14 mb-6">
+            <div className="h-12 w-12 mb-4 lg:mb-6">
                 {service.icon}
             </div>
-            <h3 className="text-2xl font-bold text-text-main mb-4">{service.title}</h3>
-            <p className="text-lg text-text-secondary mb-6 flex-grow">{service.description}</p>
+            <h3 className="text-xl lg:text-2xl font-bold text-text-main mb-4">{service.title}</h3>
+            <p className="text-base lg:text-lg text-text-secondary mb-6 flex-grow">{service.description}</p>
              <div className="border-t border-border pt-6">
-                <ul className="space-y-3">
+                <ul className="space-y-2 lg:space-y-3">
                     {service.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-3">
-                            <span className="text-primary mt-1"><CheckmarkIcon /></span>
-                            <span className="text-text-secondary text-lg">{feature}</span>
+                            <span className="text-primary mt-0.5 lg:mt-1"><CheckmarkIcon /></span>
+                            <span className="text-text-secondary text-base lg:text-lg">{feature}</span>
                         </li>
                     ))}
                 </ul>

@@ -47,13 +47,19 @@ const BackToTop: React.FC = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="bg-primary text-background rounded-lg px-4 py-2 flex items-center gap-2 shadow-lg hover:bg-primary/90 transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background cursor-hover-target"
+          className="group bg-primary text-background rounded-full p-3.5 shadow-lg hover:bg-primary/90 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background cursor-hover-target"
           aria-label="Back to top"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 15l7-7 7 7" />
-          </svg>
-          <span className="font-semibold">Back to top</span>
+          <div className="h-6 w-6 relative overflow-hidden">
+            {/* Arrow 1 */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 transition-transform duration-300 ease-in-out group-hover:-translate-y-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 15l7-7 7 7" />
+            </svg>
+            {/* Arrow 2 (initially hidden below) */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 absolute inset-0 transition-transform duration-300 ease-in-out translate-y-full group-hover:translate-y-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 15l7-7 7 7" />
+            </svg>
+          </div>
         </button>
       )}
     </div>

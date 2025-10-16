@@ -1,134 +1,192 @@
 import React from 'react';
 
-// New, "Holographic Glyph" icon for Workflow Automation
+// New, animated icon for Workflow Automation
 const IconServiceWorkflow = () => (
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-        <defs>
-            <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#45FFB0"/>
-                <stop offset="100%" stopColor="#00C46A"/>
-            </linearGradient>
-            <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+         <defs>
+            <filter id="glow-filter-workflow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
             </filter>
         </defs>
-        <g strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-            <g stroke="url(#glow)">
-                <path d="M22 16H42V28H22Z" filter="url(#blur)" opacity="0.6"/>
-                <path d="M22 16H42V28H22Z" />
-                <path d="M32 28V36" filter="url(#blur)" opacity="0.6"/>
-                <path d="M32 28V36" />
-                <path d="M14 36H50V48H14Z" filter="url(#blur)" opacity="0.6"/>
-                <path d="M14 36H50V48H14Z" />
-            </g>
+        <path d="M12 32 C 22 12, 42 52, 52 32" stroke="#f0f0f0" strokeWidth="2" strokeLinecap="round" strokeDasharray="5 5" fill="none" />
+        <circle cx="12" cy="32" r="5" stroke="#00C46A" strokeWidth="2" fill="#0A0A0A" />
+        <circle cx="52" cy="32" r="5" stroke="#00C46A" strokeWidth="2" fill="#0A0A0A" />
+        
+        <circle r="4" fill="#00C46A">
+            <animateMotion dur="4s" repeatCount="indefinite" path="M12 32 C 22 12, 42 52, 52 32" />
+        </circle>
+        <g filter="url(#glow-filter-workflow)" opacity="0.7">
+             <circle r="4" fill="#00C46A">
+                <animateMotion dur="4s" repeatCount="indefinite" path="M12 32 C 22 12, 42 52, 52 32" />
+            </circle>
         </g>
     </svg>
 );
 
-// New, "Holographic Glyph" icon for AI Integration
+// New, animated icon for AI Integration
 const IconServiceAI = () => (
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <style>
+            {`
+                @keyframes brain-pulse-anim {
+                    0%, 100% { transform: scale(0.95); opacity: 0.7; }
+                    50% { transform: scale(1.05); opacity: 1; }
+                }
+                .brain-pulse {
+                    animation: brain-pulse-anim 2.5s infinite ease-in-out;
+                    transform-origin: 32px 32px;
+                }
+            `}
+        </style>
         <defs>
-            <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#45FFB0"/>
-                <stop offset="100%" stopColor="#00C46A"/>
-            </linearGradient>
-            <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+            <filter id="glow-filter-ai" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" />
             </filter>
         </defs>
-        <g strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-             <g stroke="url(#glow)">
-                <path d="M52 32C52 42.464 43.2987 51 32 51C28.1091 51 24.522 49.8273 21.6 47.8L12 52L16.2 42.4C13.1727 39.478 12 35.8909 12 32C12 21.536 20.7013 13 32 13C43.2987 13 52 21.536 52 32Z" filter="url(#blur)" opacity="0.6"/>
-                <path d="M52 32C52 42.464 43.2987 51 32 51C28.1091 51 24.522 49.8273 21.6 47.8L12 52L16.2 42.4C13.1727 39.478 12 35.8909 12 32C12 21.536 20.7013 13 32 13C43.2987 13 52 21.536 52 32Z" />
-                <g filter="url(#blur)" opacity="0.8">
-                    <path d="M26 32H38" strokeWidth="5"/>
-                    <path d="M32 26V38" strokeWidth="5"/>
-                </g>
-             </g>
-             <g stroke="#f0f0f0" strokeWidth="2.5">
-                <path d="M26 32H38" />
-                <path d="M32 26V38" />
-             </g>
+        <path d="M52 32C52 42.464 43.2987 51 32 51C28.1091 51 24.522 49.8273 21.6 47.8L12 52L16.2 42.4C13.1727 39.478 12 35.8909 12 32C12 21.536 20.7013 13 32 13C43.2987 13 52 21.536 52 32Z" stroke="#f0f0f0" strokeWidth="2" />
+        
+        <g className="brain-pulse">
+            <path d="M32,22 C26,22 24,28 24,32 C24,36 26,42 32,42 S40,36 40,32 C40,28 38,22 32,22Z M32,22 V42 M26,28 H38 M26,36 H38"
+                stroke="#00C46A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <g filter="url(#glow-filter-ai)" opacity="0.7">
+                 <path d="M32,22 C26,22 24,28 24,32 C24,36 26,42 32,42 S40,36 40,32 C40,28 38,22 32,22Z M32,22 V42 M26,28 H38 M26,36 H38"
+                    stroke="#00C46A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </g>
         </g>
     </svg>
 );
 
-// New, "Holographic Glyph" icon for CRM & Marketing Optimization
+// New, animated icon for CRM & Marketing Optimization
 const IconServiceCRMAndMarketing = () => (
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <style>
+            {`
+                @keyframes bar-up-down {
+                    0%, 100% { transform: scaleY(0.2); }
+                    50% { transform: scaleY(1); }
+                }
+                .bar1 { animation: bar-up-down 2s infinite ease-in-out; animation-delay: 0s; transform-origin: bottom; }
+                .bar2 { animation: bar-up-down 2s infinite ease-in-out; animation-delay: 0.2s; transform-origin: bottom; }
+                .bar3 { animation: bar-up-down 2s infinite ease-in-out; animation-delay: 0.4s; transform-origin: bottom; }
+            `}
+        </style>
         <defs>
-            <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#45FFB0"/>
-                <stop offset="100%" stopColor="#00C46A"/>
-            </linearGradient>
-            <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+            <filter id="glow-filter-crm" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
             </filter>
         </defs>
-        <g stroke="url(#glow)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-            <g filter="url(#blur)" opacity="0.6">
-                 <circle cx="26" cy="24" r="8"/>
-                 <path d="M40 50V46C40 41.5817 36.4183 38 32 38H20C15.5817 38 12 41.5817 12 46V50"/>
-            </g>
-            <circle cx="26" cy="24" r="8"/>
-            <path d="M40 50V46C40 41.5817 36.4183 38 32 38H20C15.5817 38 12 41.5817 12 46V50"/>
-            <g filter="url(#blur)" opacity="0.8">
-                 <path d="M42 32L50 24L58 32" strokeWidth="4.5"/>
-                 <path d="M50 24V44" strokeWidth="4.5"/>
-            </g>
-            <path d="M42 32L50 24L58 32" stroke="url(#glow)" strokeWidth="4.5"/>
-            <path d="M50 24V44" stroke="url(#glow)" strokeWidth="4.5"/>
+        <circle cx="22" cy="24" r="8" stroke="#f0f0f0" strokeWidth="2" />
+        <path d="M36 52V48C36 43.5817 32.4183 40 28 40H16C11.5817 40 8 43.5817 8 48V52" stroke="#f0f0f0" strokeWidth="2" />
+        <g>
+            <path d="M40 52 H62" stroke="#f0f0f0" strokeWidth="2" />
+            <rect className="bar1" x="42" y="32" width="5" height="20" fill="#00C46A" rx="2" />
+            <rect className="bar2" x="49" y="32" width="5" height="20" fill="#00C46A" rx="2" />
+            <rect className="bar3" x="56" y="32" width="5" height="20" fill="#00C46A" rx="2" />
+             <g filter="url(#glow-filter-crm)" opacity="0.7">
+                <rect className="bar1" x="42" y="32" width="5" height="20" fill="#00C46A" rx="2" />
+                <rect className="bar2" x="49" y="32" width="5" height="20" fill="#00C46A" rx="2" />
+                <rect className="bar3" x="56" y="32" width="5" height="20" fill="#00C46A" rx="2" />
+             </g>
         </g>
     </svg>
 );
 
-// New, "Holographic Glyph" icon for Productivity Automation
+// New, animated icon for Productivity Automation
 const IconServiceProductivity = () => (
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <style>
+            {`
+                @keyframes arrow-flow-anim {
+                    0% { transform: translateX(-2px); opacity: 0; }
+                    20% { opacity: 1; }
+                    70% { transform: translateX(16px); opacity: 1; }
+                    90%, 100% { transform: translateX(16px); opacity: 0; }
+                }
+                @keyframes sheet-glow-anim {
+                    0%, 70% { stroke: #00C46A; }
+                    85% { stroke: #f0f0f0; }
+                    100% { stroke: #00C46A; }
+                }
+                .arrow-flow {
+                    animation: arrow-flow-anim 3s infinite ease-in-out;
+                }
+                .sheet-glow {
+                    animation: sheet-glow-anim 3s infinite ease-in-out;
+                }
+            `}
+        </style>
         <defs>
-            <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#45FFB0"/>
-                <stop offset="100%" stopColor="#00C46A"/>
-            </linearGradient>
-            <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+            <filter id="glow-filter-prod" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" />
             </filter>
         </defs>
-        <g stroke="url(#glow)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-            <g filter="url(#blur)" opacity="0.6">
-                <circle cx="32" cy="32" r="22"/>
-                <path d="M32 20V32L40 36"/>
+        {/* Main document frame */}
+        <path d="M16 12 H40 L48 20 V52 H16 Z" stroke="#f0f0f0" strokeWidth="2" />
+        <path d="M40 12 V20 H48" stroke="#f0f0f0" strokeWidth="2" />
+
+        {/* Inner elements: Gmail -> Sheets */}
+        <g transform="translate(-4, 2)">
+            {/* Gmail Icon (simplified envelope) */}
+            <g>
+                <path d="M26 30 l6 4 l6 -4" stroke="#00C46A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="26" y="30" width="12" height="8" rx="1" stroke="#00C46A" strokeWidth="1.5" fill="none" />
             </g>
-            <circle cx="32" cy="32" r="22"/>
-            <path d="M32 20V32L40 36"/>
-            <g filter="url(#blur)" opacity="0.8">
-                <path d="M46 18L40 30H52L46 42" strokeWidth="4.5"/>
+            
+            {/* Arrow */}
+            <g className="arrow-flow">
+                <path d="M39 34 L43 34" stroke="#f0f0f0" strokeWidth="2" strokeLinecap="round" />
+                <path d="M41 32 L43 34 L41 36" stroke="#f0f0f0" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </g>
-            <path d="M46 18L40 30H52L46 42" stroke="url(#glow)" strokeWidth="4.5"/>
+
+            {/* Sheets Icon (simplified grid) */}
+            <g className="sheet-glow">
+                <rect x="45" y="30" width="8" height="8" rx="1" strokeWidth="1.5" fill="none" />
+                <path d="M45 34 h8 M49 30 v8" strokeWidth="1" />
+            </g>
+             <g filter="url(#glow-filter-prod)" opacity="0.7">
+                <path d="M26 30 l6 4 l6 -4" stroke="#00C46A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <g className="sheet-glow">
+                    <rect x="45" y="30" width="8" height="8" rx="1" strokeWidth="1.5" fill="none" />
+                </g>
+             </g>
         </g>
     </svg>
 );
 
-// New, "Holographic Glyph" icon for API Integrations
+// New, animated icon for API Integrations
 const IconServiceAPI = () => (
     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+        <style>
+            {`
+                @keyframes arrow-left-anim {
+                    0%, 100% { transform: translateX(0px); opacity: 1;}
+                    50% { transform: translateX(-12px); opacity: 0; }
+                    51% { transform: translateX(12px); opacity: 0; }
+                }
+                @keyframes arrow-right-anim {
+                    0%, 100% { transform: translateX(0px); opacity: 1;}
+                    50% { transform: translateX(12px); opacity: 0; }
+                    51% { transform: translateX(-12px); opacity: 0; }
+                }
+                .arrow-left { animation: arrow-left-anim 3s infinite ease-in-out; }
+                .arrow-right { animation: arrow-right-anim 3s infinite ease-in-out; }
+            `}
+        </style>
         <defs>
-            <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#45FFB0"/>
-                <stop offset="100%" stopColor="#00C46A"/>
-            </linearGradient>
-            <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+            <filter id="glow-filter-api" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" />
             </filter>
         </defs>
-        <g stroke="url(#glow)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-            <g filter="url(#blur)" opacity="0.6">
-                <path d="M24 16L8 32L24 48"/>
-                <path d="M40 16L56 32L40 48"/>
+        <path d="M24 16 L12 32 L24 48" stroke="#f0f0f0" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M40 16 L52 32 L40 48" stroke="#f0f0f0" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+        <g>
+            <path d="M26 26 L38 32 L26 38 Z" stroke="#00C46A" strokeWidth="2.5" fill="#00C46A" className="arrow-right" />
+            <path d="M38 26 L26 32 L38 38 Z" stroke="#00C46A" strokeWidth="2.5" fill="#00C46A" className="arrow-left" />
+            <g filter="url(#glow-filter-api)" opacity="0.7">
+                <path d="M26 26 L38 32 L26 38 Z" stroke="#00C46A" strokeWidth="2.5" fill="#00C46A" className="arrow-right" />
+                <path d="M38 26 L26 32 L38 38 Z" stroke="#00C46A" strokeWidth="2.5" fill="#00C46A" className="arrow-left" />
             </g>
-            <path d="M24 16L8 32L24 48"/>
-            <path d="M40 16L56 32L40 48"/>
         </g>
     </svg>
 );

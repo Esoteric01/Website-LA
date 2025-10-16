@@ -47,7 +47,7 @@ const Header: React.FC = () => {
           ))}
         </nav>
         <div className="hidden md:block">
-           <button onClick={() => scrollToSection('contact')} className="bg-surface hover:bg-border border border-border text-text-main font-bold py-2 px-5 rounded-lg transition-all duration-300 transform active:scale-95 text-xl cursor-hover-target">
+           <button onClick={() => scrollToSection('contact')} className="bg-primary hover:bg-primary/90 text-background font-bold py-2 px-5 rounded-lg transition-all duration-300 transform active:scale-95 text-xl cursor-hover-target">
               Let's Talk
             </button>
         </div>
@@ -66,7 +66,7 @@ const Header: React.FC = () => {
               {link.title}
             </button>
           ))}
-           <button onClick={() => scrollToSection('contact')} className="bg-surface hover:bg-border border border-border text-text-main font-bold py-2 px-5 rounded-lg transition-all duration-300 transform active:scale-95 text-xl cursor-hover-target">
+           <button onClick={() => scrollToSection('contact')} className="bg-primary hover:bg-primary/90 text-background font-bold py-2 px-5 rounded-lg transition-all duration-300 transform active:scale-95 text-xl cursor-hover-target">
             Let's Talk
           </button>
         </nav>

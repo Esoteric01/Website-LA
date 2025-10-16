@@ -59,28 +59,6 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
       if (glowRef.current) {
         glowRef.current.style.transform = `translateY(${scrollY * 0.3}px) translateX(-50%)`;
       }
-
-      const screenHeight = window.innerHeight;
-
-      // Parallax for text content
-      if (contentRef.current) {
-        const { top, height } = contentRef.current.getBoundingClientRect();
-        if (top < screenHeight && top > -height) {
-          const speed = -0.1;
-          const translateY = (screenHeight / 2 - top) * speed;
-          contentRef.current.style.transform = `translateY(${translateY}px)`;
-        }
-      }
-
-      // Parallax for image
-      if (imageRef.current) {
-        const { top, height } = imageRef.current.getBoundingClientRect();
-        if (top < screenHeight && top > -height) {
-          const speed = 0.05;
-          const translateY = (screenHeight / 2 - top) * speed;
-          imageRef.current.style.transform = `translateY(${translateY}px)`;
-        }
-      }
     };
 
     const onScroll = () => window.requestAnimationFrame(handleScroll);
@@ -103,7 +81,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-start lg:items-center pt-24 lg:pt-0 motion-safe:animate-fade-in-up relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center pt-24 lg:pt-0 motion-safe:animate-fade-in-up relative overflow-hidden">
       <div 
         ref={glowRef}
         className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[80vh] w-[150%] max-w-[1200px]"
@@ -114,10 +92,10 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
       >
       </div>
 
-      <div className="flex flex-col-reverse lg:flex-row items-center lg:items-center gap-12 lg:gap-16 w-full z-10">
+      <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16 w-full z-10">
         {/* Left Column: Text Content */}
-        <div ref={contentRef} className="lg:w-3/5 text-center lg:text-left" style={{ willChange: 'transform' }}>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black font-display text-text-main mb-4 tracking-tighter">Hey, I'm Loiz Almerino</h1>
+        <div ref={contentRef} className="lg:w-3/5 text-center lg:text-left">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-black font-display text-text-main mb-4 tracking-tighter">Hey, I'm Loiz Almerino</h1>
           <h2 className="text-3xl md:text-4xl font-bold font-display text-primary mb-8 h-20 lg:h-12">
             {currentText}
             <span className="text-primary animate-blink">|</span>
@@ -149,7 +127,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
         </div>
 
         {/* Right Column: Image & Logos */}
-        <div ref={imageRef} className="lg:w-2/5 flex flex-col items-center justify-center flex-shrink-0" style={{ willChange: 'transform' }}>
+        <div ref={imageRef} className="lg:w-2/5 flex flex-col items-center justify-center flex-shrink-0">
           <div className="relative w-80 h-80 lg:w-[28rem] lg:h-[28rem] mb-4">
             <div 
               className="absolute inset-0 rounded-full animate-rotate"

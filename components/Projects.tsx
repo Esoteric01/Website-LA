@@ -27,7 +27,7 @@ const createGradientPlaceholder = (platform: string, color1: string, color2: str
         </g>
       `;
       break;
-    case "Make (Integromat) Projects":
+    case "Make":
       artElements = `
         <g fill="${artColor}" opacity="0.15">
           <circle cx="100" cy="300" r="80" />
@@ -199,6 +199,52 @@ const rawProjectData = [
     ],
   },
   {
+    platform: "Make",
+    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/make.png?raw=true" alt="Make.com logo" className="h-full w-full object-contain" loading="lazy" />,
+    projects: [
+      { 
+        title: "Automated Xero to Asana CSV Export", 
+        description: "Overview:\nAutomated the process of exporting financial data from Xero and creating actionable tasks in Asana for team review.\n\nProcess:\nA Make scenario runs on a schedule to fetch new invoices from the Xero API. The data is compiled into a CSV file, uploaded to Google Drive, and a task is created in Asana with a link to the file, notifying the finance team.\n\nResults:\nEliminated manual data entry and report generation, ensured timely review of financial documents, and improved accuracy by removing the risk of human error.",
+        technologyUsed: ["Make", "Xero API", "Asana", "Google Sheets"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Make.jpg?raw=true",
+        images: [
+          {
+            label: "Make Screenshot",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Make.jpg?raw=true"
+          },
+          {
+            label: "Xero Screenshot",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Xero.jpg?raw=true"
+          },
+          {
+            label: "Asana",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Asana.jpg?raw=true"
+          }
+        ]
+      },
+      { 
+        title: "Automated Gmail Attachment Organizer for Google Drive", 
+        description: "Overview:\nCreated an intelligent system to automatically scan incoming Gmail attachments and organize them into categorized folders within Google Drive.\n\nProcess:\nThe Make scenario watches for new emails with attachments. It uses filters to identify keywords (e.g., 'invoice,' 'report'). Based on these rules, it saves the attachment to the corresponding folder in Google Drive, renaming the file for consistency.\n\nResults:\nSaved countless hours of manual sorting, created a perfectly organized document repository, and prevented important files from being lost in the inbox.",
+        technologyUsed: ["Make", "Gmail", "Google Drive"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive.jpg?raw=true",
+        images: [
+          {
+            label: "Make Screenshot",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Make.jpg?raw=true"
+          },
+          {
+            label: "Google Drive Screenshot",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Google%20Drive.jpg?raw=true"
+          },
+          {
+            label: "Google Sheet",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Google%20Sheet.jpg?raw=true"
+          }
+        ]
+      },
+    ],
+  },
+  {
     platform: "Zapier Projects",
     icon: <img src="https://raw.githubusercontent.com/Esoteric01/loizalmerino.com-assets/63f6c62cf0ca76d0b2b0830591ddff179e9c9295/Automation%20Projects%20Images/zapier.svg" alt="Zapier logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
@@ -224,57 +270,11 @@ const rawProjectData = [
       },
     ],
   },
-  {
-    platform: "Make (Integromat) Projects",
-    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/make.png?raw=true" alt="Make.com logo" className="h-full w-full object-contain" loading="lazy" />,
-    projects: [
-      { 
-        title: "Automated Xero to Asana CSV Export", 
-        description: "Overview:\nAutomated the process of exporting financial data from Xero and creating actionable tasks in Asana for team review.\n\nProcess:\nA Make scenario runs on a schedule to fetch new invoices from the Xero API. The data is compiled into a CSV file, uploaded to Google Drive, and a task is created in Asana with a link to the file, notifying the finance team.\n\nResults:\nEliminated manual data entry and report generation, ensured timely review of financial documents, and improved accuracy by removing the risk of human error.",
-        technologyUsed: ["Make (Integromat)", "Xero API", "Asana", "Google Sheets"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Make.jpg?raw=true",
-        images: [
-          {
-            label: "Make Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Make.jpg?raw=true"
-          },
-          {
-            label: "Xero Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Xero.jpg?raw=true"
-          },
-          {
-            label: "Asana",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Asana.jpg?raw=true"
-          }
-        ]
-      },
-      { 
-        title: "Automated Gmail Attachment Organizer for Google Drive", 
-        description: "Overview:\nCreated an intelligent system to automatically scan incoming Gmail attachments and organize them into categorized folders within Google Drive.\n\nProcess:\nThe Make scenario watches for new emails with attachments. It uses filters to identify keywords (e.g., 'invoice,' 'report'). Based on these rules, it saves the attachment to the corresponding folder in Google Drive, renaming the file for consistency.\n\nResults:\nSaved countless hours of manual sorting, created a perfectly organized document repository, and prevented important files from being lost in the inbox.",
-        technologyUsed: ["Make (Integromat)", "Gmail", "Google Drive"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive.jpg?raw=true",
-        images: [
-          {
-            label: "Make Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Make.jpg?raw=true"
-          },
-          {
-            label: "Google Drive Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Google%20Drive.jpg?raw=true"
-          },
-          {
-            label: "Google Sheet",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Google%20Sheet.jpg?raw=true"
-          }
-        ]
-      },
-    ],
-  },
 ];
 
 const platformColors = {
   "Zapier Projects": { color1: '#0A0A0A', color2: '#141414', iconColor: '#00C46A' },
-  "Make (Integromat) Projects": { color1: '#141414', color2: '#0A0A0A', iconColor: '#00C46A' },
+  "Make": { color1: '#141414', color2: '#0A0A0A', iconColor: '#00C46A' },
   "n8n Projects": { color1: '#0A0A0A', color2: '#141414', iconColor: '#00C46A' },
 };
 

@@ -8,8 +8,8 @@ interface ProjectModalProps {
 }
 
 const FullscreenEnterIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m0 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5h-4m0 0v-4m0 4l-5-5" />
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4h4m12 4V4h-4M4 16v4h4m12-4v4h-4" />
   </svg>
 );
 
@@ -218,8 +218,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           >
             <img src={imagesToShow[currentImageIndex].url} alt={imagesToShow[currentImageIndex].label} className={`w-full h-auto object-contain transition-opacity duration-300 ${isFullscreen ? 'max-h-screen' : 'max-h-[45vh] md:max-h-[60vh]'}`} loading="lazy" />
             
-            <div className={`absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-center py-1 px-4 backdrop-blur-sm rounded-full z-10 transition-opacity duration-300 ${!isFullscreen ? 'hidden' : 'opacity-0 group-hover:opacity-100'}`}>
-                <p className="font-semibold text-sm">{imagesToShow[currentImageIndex].label}</p>
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm font-semibold py-1 px-3 backdrop-blur-sm rounded-full z-10">
+              {imagesToShow[currentImageIndex].label}
             </div>
             
             {hasSlideshow && (

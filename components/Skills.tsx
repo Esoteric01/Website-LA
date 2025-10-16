@@ -37,7 +37,7 @@ const Skills: React.FC = () => {
   return (
     <section ref={sectionRef} id="skills" className="py-20 md:py-36 relative overflow-hidden">
       <div className={`text-center mb-16 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
-        <h2 className="text-5xl sm:text-6xl font-black font-display text-text-main mb-4">
+        <h2 className="text-5xl sm:text-6xl font-black font-display text-text-main mb-4 tracking-tighter">
           Automation Stack
         </h2>
         <p className="max-w-3xl mx-auto text-2xl text-primary">

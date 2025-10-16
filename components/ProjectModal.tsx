@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Project } from '../types';
 
 interface ProjectModalProps {
@@ -9,25 +9,41 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isClosing, setIsClosing] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    // Reset image index when a new project is opened
-    setCurrentImageIndex(0);
+    if (project) {
+      setShow(true);
+      setIsClosing(false);
+      setCurrentImageIndex(0);
+    }
   }, [project]);
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setShow(false);
+      onClose();
+    }, 300); // Corresponds to animation duration
+  }, [onClose]);
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
-    window.addEventListener('keydown', handleEsc);
+    if (show) {
+      window.addEventListener('keydown', handleEsc);
+    }
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [onClose]);
+  }, [show, handleClose]);
 
-  if (!project) return null;
+  if (!show) return null;
+  if (!project) return null; // Keep project data during closing animation
   
   const hasSlideshow = project.images && project.images.length > 0;
   const imagesToShow = hasSlideshow ? project.images! : [{ url: project.imageUrl, label: project.title }];
@@ -48,17 +64,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-background/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300 animate-fade-in-up"
-      onClick={onClose}
+      className={`fixed inset-0 bg-background/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+      onClick={handleClose}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className="bg-surface rounded-xl shadow-2xl w-full max-w-[85vw] transform transition-all duration-300 scale-95 animate-fade-in-up border border-border relative overflow-y-auto max-h-[90vh]"
+        className={`bg-surface rounded-xl shadow-2xl w-full max-w-[85vw] transform border border-border relative overflow-y-auto max-h-[90vh] ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-surface transition-colors z-20 cursor-hover-target"
           aria-label="Close project details"
         >
@@ -68,7 +84,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         </button>
         
         <div className="p-8 md:p-10">
-          <h3 className="text-4xl font-bold font-display text-text-main mb-4 pr-8">{project.title}</h3>
+          <h3 className="text-4xl font-bold font-display text-text-main mb-4 pr-8 leading-snug">{project.title}</h3>
           
           {(() => {
             // Check if the description contains structured headings.
@@ -76,7 +92,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             
             if (containsHeadings) {
               return (
-                <div className="text-xl leading-relaxed mb-8 space-y-6">
+                <div className="text-lg leading-relaxed mb-8 space-y-6">
                   {project.description.split('\n\n').map((paragraph, index) => {
                     const lines = paragraph.split('\n');
                     const firstLine = lines[0];
@@ -89,7 +105,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                       
                       return (
                         <div key={index}>
-                          <p className="font-bold text-primary">{cleanHeading}:</p>
+                          <p className="font-bold text-primary text-lg">{cleanHeading}:</p>
                           <p className="text-text-secondary">{fullContent}</p>
                         </div>
                       );
@@ -102,7 +118,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             }
 
             return (
-              <p className="text-xl text-text-secondary leading-relaxed mb-8 whitespace-pre-line">
+              <p className="text-lg text-text-secondary leading-relaxed mb-8 whitespace-pre-line">
                 {project.description}
               </p>
             );

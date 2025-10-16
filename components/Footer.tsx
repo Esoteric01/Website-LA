@@ -35,7 +35,9 @@ const Footer: React.FC = () => {
       <div className="max-w-8xl mx-auto px-4 md:px-8 py-8 text-text-secondary">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
-                <div className="text-3xl font-bold font-display text-text-main mb-2">Loiz Almerino</div>
+                <div className="mb-2">
+                  <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Navigation%20and%20Footer%20Section%20Images/logo.png?raw=true" alt="Loiz Almerino Logo" className="h-12 w-auto mx-auto md:mx-0" />
+                </div>
                 <p>&copy; {new Date().getFullYear()} All Rights Reserved.</p>
             </div>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-lg">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Tool } from '../types';
 
 interface AllSkillsModalProps {
@@ -9,24 +9,40 @@ interface AllSkillsModalProps {
 
 const AllSkillsModal: React.FC<AllSkillsModalProps> = ({ isOpen, onClose, tools }) => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [isClosing, setIsClosing] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShow(true);
+      setIsClosing(false);
+      setActiveCategory('All');
+    }
+  }, [isOpen]);
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setShow(false);
+      onClose();
+    }, 300); // Corresponds to animation duration
+  }, [onClose]);
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
-    if (isOpen) {
+    if (show) {
       window.addEventListener('keydown', handleEsc);
-      // Reset filter when modal opens
-      setActiveCategory('All');
     }
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [isOpen, onClose]);
+  }, [show, handleClose]);
 
-  if (!isOpen) return null;
+  if (!show) return null;
 
   const categories = ['All', ...new Set(tools.map(tool => tool.category))];
 
@@ -36,17 +52,17 @@ const AllSkillsModal: React.FC<AllSkillsModalProps> = ({ isOpen, onClose, tools 
 
   return (
     <div
-      className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300 animate-fade-in"
-      onClick={onClose}
+      className={`fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+      onClick={handleClose}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className="bg-surface rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] relative transform transition-all duration-300 scale-95 animate-fade-in-up border border-border flex flex-col"
+        className={`bg-surface rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] relative border border-border flex flex-col ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-8 pb-4">
-            <h3 className="text-4xl font-bold font-display text-text-main text-center">My Automation Stack</h3>
+            <h3 className="text-4xl font-bold font-display text-text-main text-center leading-snug">My Automation Stack</h3>
             <p className="text-xl text-primary mt-2 text-center max-w-2xl mx-auto">An interactive overview of the tools I use to bring automation projects to life.</p>
         </div>
         
@@ -85,7 +101,7 @@ const AllSkillsModal: React.FC<AllSkillsModalProps> = ({ isOpen, onClose, tools 
         </div>
 
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-border transition-colors z-20 cursor-hover-target"
           aria-label="Close skills details"
         >

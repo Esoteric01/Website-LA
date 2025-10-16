@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
           
           {/* Left Column: Info & CTA */}
           <div ref={leftColRef} style={{ willChange: 'transform' }} className={`lg:pr-8 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
-            <h2 className="text-5xl sm:text-6xl font-black font-display mb-4 text-text-main">
+            <h2 className="text-5xl sm:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">
               Ready to build your automated future?
             </h2>
             <p className="max-w-2xl text-xl text-primary mb-8">
@@ -88,7 +88,7 @@ const Contact: React.FC = () => {
 
             <div className="space-y-6">
                 <div>
-                    <h3 className="text-2xl font-bold font-display text-text-main mb-4">Other ways to connect</h3>
+                    <h3 className="text-3xl font-bold font-display text-text-main mb-4 leading-snug">Other ways to connect</h3>
                     <div className="space-y-4">
                         <div className="flex items-center gap-4 text-lg text-primary">
                             <div className="bg-surface p-3 rounded-lg border border-primary/50"><Icons.IconMail /></div>
@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
                     </div>
                 </div>
                  <div>
-                    <h3 className="text-2xl font-bold font-display text-text-main mb-4">Find me on</h3>
+                    <h3 className="text-3xl font-bold font-display text-text-main mb-4 leading-snug">Find me on</h3>
                     <div className="flex flex-wrap gap-4">
                          <a 
                             href="https://www.linkedin.com/in/la-almerino-2873aa155/" 
@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
 
           {/* Right Column: Contact Form Card */}
           <div ref={rightColRef} className={`bg-surface rounded-2xl p-8 md:p-10 border border-border shadow-2xl ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms', willChange: 'transform' }}>
-            <h3 className="text-3xl font-bold font-display text-text-main mb-6">Send me a message</h3>
+            <h3 className="text-3xl font-bold font-display text-text-main mb-6 leading-snug">Send me a message</h3>
             <form
               action="mailto:loizalmerino@gmail.com"
               method="POST"

@@ -32,6 +32,7 @@ export interface Service {
   icon: ReactElement;
   title: string;
   description: string;
+  features: string[];
 }
 
 export interface Testimonial {

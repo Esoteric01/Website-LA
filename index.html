@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth scroll-pt-20">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A0A0A'/%3E%3Cpath d='M30 75 L30 25 L45 25 M30 50 L45 50' stroke='%2300C46A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M55 25 L80 50 L55 75' stroke='%23f0f0f0' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="icon" href="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Navigation%20and%20Footer%20Section%20Images/logo.png?raw=true" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loiz Almerino | AI Workflow Automation Specialist</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,12 +23,14 @@
               'border': '#262626',
             },
             fontFamily: {
-              sans: ['Satoshi', 'sans-serif'],
-              display: ['Satoshi', 'sans-serif'],
+              sans: ['Manrope', 'sans-serif'],
+              display: ['Manrope', 'sans-serif'],
             },
             animation: {
               'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
-              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'fade-out-down': 'fadeOutDown 0.3s ease-out forwards',
+              'fade-in': 'fadeIn 0.3s ease-out forwards',
+              'fade-out': 'fadeOut 0.3s ease-out forwards',
               'slide': 'slide 60s linear infinite',
               'slide-reverse': 'slide-reverse 60s linear infinite',
               'rotate': 'rotate 10s linear infinite',
@@ -39,9 +41,17 @@
                 '0%': { opacity: '0', transform: 'translateY(20px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
               },
+              fadeOutDown: {
+                '0%': { opacity: '1', transform: 'translateY(0)' },
+                '100%': { opacity: '0', transform: 'translateY(20px)' },
+              },
               fadeIn: {
                 '0%': { opacity: '0' },
                 '100%': { opacity: '1' },
+              },
+              fadeOut: {
+                '0%': { opacity: '1' },
+                '100%': { opacity: '0' },
               },
               slide: {
                 'from': { transform: 'translateX(0)' },
@@ -69,7 +79,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script type="importmap">
 {
   "imports": {

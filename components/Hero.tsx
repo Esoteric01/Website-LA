@@ -117,17 +117,17 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
       <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-12 md:gap-16 w-full z-10">
         {/* Left Column: Text Content */}
         <div ref={contentRef} className="md:w-3/5 text-center md:text-left" style={{ willChange: 'transform' }}>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-display text-text-main mb-4">Hey, I'm Loiz Almerino</h1>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-display text-text-main mb-4 tracking-tighter">Hey, I'm Loiz Almerino</h1>
           <h2 className="text-3xl md:text-4xl font-bold font-display text-primary mb-8 h-20 md:h-12">
             {currentText}
             <span className="text-primary animate-blink">|</span>
           </h2>
           
           <div className="mb-8 max-w-3xl mx-auto md:mx-0 space-y-4">
-            <p className="text-xl md:text-2xl font-semibold text-text-main">
+            <p className="text-xl md:text-2xl font-semibold text-text-main leading-snug">
               I Build Smart Automations That Save Time and Boost Productivity
             </p>
-            <p className="text-lg md:text-xl leading-loose text-text-secondary">
+            <p className="text-lg md:text-xl leading-relaxed text-text-secondary">
               I design simple, scalable solutions that let businesses work smarter, reduce errors, and focus on what truly matters.
             </p>
           </div>
@@ -161,7 +161,7 @@ const Hero: React.FC<HeroProps> = ({ onKnowMoreClick }) => {
             <img 
               src="https://github.com/Esoteric01/Portfolio-Images/blob/main/Formal.jpg?raw=true"
               alt="Portrait of Loiz Almerino"
-              className="relative rounded-full w-full h-full object-cover ring-2 ring-primary/50"
+              className="relative rounded-full w-full h-full object-cover ring-2 ring-primary ring-offset-2 ring-offset-border"
             />
           </div>
 

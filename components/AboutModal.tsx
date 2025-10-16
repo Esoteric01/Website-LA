@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 interface AboutModalProps {
   isOpen: boolean;
@@ -52,38 +52,56 @@ const storyContent = [
 
 
 const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
+  const [isClosing, setIsClosing] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShow(true);
+      setIsClosing(false);
+      document.body.style.overflow = 'hidden';
+    }
+  }, [isOpen]);
+  
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setShow(false);
+      onClose();
+      document.body.style.overflow = 'unset';
+    }, 300); // Corresponds to animation duration
+  }, [onClose]);
+
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
-    if (isOpen) {
+    if (show) {
         window.addEventListener('keydown', handleEsc);
-        document.body.style.overflow = 'hidden';
     }
     
     return () => {
       window.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
+  }, [show, handleClose]);
 
-  if (!isOpen) return null;
+  if (!show) return null;
 
   return (
     <div
-      className="fixed inset-0 bg-background/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300 animate-fade-in-up"
-      onClick={onClose}
+      className={`fixed inset-0 bg-background/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+      onClick={handleClose}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className="bg-surface rounded-xl shadow-2xl w-full max-w-7xl transform transition-all duration-300 scale-95 animate-fade-in-up border border-border relative overflow-y-auto max-h-[90vh]"
+        className={`bg-surface rounded-xl shadow-2xl w-full max-w-7xl transform border border-border relative overflow-y-auto max-h-[90vh] ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-text-secondary bg-surface/50 backdrop-blur-sm rounded-full p-2 hover:bg-surface transition-colors z-20 cursor-hover-target"
           aria-label="Close story"
         >
@@ -94,7 +112,7 @@ const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
         
         <div className="p-8 md:p-12">
             <div className="text-center mb-12">
-              <h2 className="text-4xl sm:text-5xl font-black font-display text-text-main mb-3">My Story</h2>
+              <h2 className="text-4xl sm:text-5xl font-black font-display text-text-main mb-3 tracking-tighter">My Story</h2>
               <p className="max-w-2xl mx-auto text-xl text-primary">From IT infrastructure to AI-powered automation.</p>
             </div>
             
@@ -125,7 +143,7 @@ const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                                 <div className="bg-border/50 border border-border rounded-lg p-2 text-primary w-10 h-10 flex-shrink-0">
                                     {item.icon}
                                 </div>
-                                <h3 className="text-3xl font-bold text-text-main">{item.title}</h3>
+                                <h3 className="text-3xl font-bold text-text-main leading-snug">{item.title}</h3>
                             </div>
                             <p className="text-lg text-text-secondary leading-relaxed">{item.text}</p>
                         </div>

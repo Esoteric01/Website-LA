@@ -59,20 +59,18 @@ const Header: React.FC = () => {
           </button>
         </div>
       </div>
-      {isMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border">
-          <nav className="flex flex-col items-center py-4 space-y-4">
-            {navLinks.map(link => (
-              <button key={link.id} onClick={() => scrollToSection(link.id)} className="text-lg text-text-secondary hover:text-text-main transition-colors duration-300 font-medium cursor-hover-target">
-                {link.title}
-              </button>
-            ))}
-             <button onClick={() => scrollToSection('contact')} className="bg-surface hover:bg-border border border-border text-text-main font-bold py-2 px-5 rounded-lg transition-all duration-300 transform active:scale-95 text-xl cursor-hover-target">
-              Let's Talk
+      <div className={`md:hidden bg-background/95 backdrop-blur-lg border-t border-border overflow-hidden transition-all duration-300 ease-out ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`}>
+        <nav className="flex flex-col items-center py-4 space-y-4">
+          {navLinks.map(link => (
+            <button key={link.id} onClick={() => scrollToSection(link.id)} className="text-lg text-text-secondary hover:text-text-main transition-colors duration-300 font-medium cursor-hover-target">
+              {link.title}
             </button>
-          </nav>
-        </div>
-      )}
+          ))}
+           <button onClick={() => scrollToSection('contact')} className="bg-surface hover:bg-border border border-border text-text-main font-bold py-2 px-5 rounded-lg transition-all duration-300 transform active:scale-95 text-xl cursor-hover-target">
+            Let's Talk
+          </button>
+        </nav>
+      </div>
     </header>
   );
 };

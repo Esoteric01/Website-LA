@@ -121,12 +121,12 @@ const Services: React.FC = () => {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-8">
         {servicesData.map((service, index) => (
           <div
             key={index}
             ref={el => cardRefs.current[index] = el}
-            className={`flex flex-col bg-surface border border-border rounded-2xl p-6 lg:p-8 transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}
+            className={`w-full max-w-sm flex flex-col bg-surface border border-border rounded-2xl p-6 lg:p-8 transition-all duration-300 hover:border-primary/80 hover:shadow-[0_0_25px_rgba(0,196,106,0.2)] motion-safe:hover:-translate-y-2 cursor-hover-target ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}
             style={{ animationDelay: `${index * 150}ms`, willChange: 'transform' }}
           >
             <div className="h-12 w-12 mb-4 lg:mb-6">

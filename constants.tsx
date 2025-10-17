@@ -220,6 +220,20 @@ const IconMail = () => (
     </svg>
 );
 
+const IconGmail = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M22 5.5H2V18h20V5.5zM20 7.5L12 13L4 7.5V7h16v.5z" />
+    </svg>
+);
+
+const IconEmailApp = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+    </svg>
+);
+
+
 export const Icons = {
   IconServiceWorkflow,
   IconServiceAI,
@@ -230,4 +244,6 @@ export const Icons = {
   IconSend,
   IconPhone,
   IconMail,
+  IconGmail,
+  IconEmailApp,
 };

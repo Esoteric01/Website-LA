@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -365,19 +366,19 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
         </p>
       </div>
       
-      <div className="flex justify-center items-center flex-wrap bg-background border border-border rounded-xl p-1.5 gap-2 mb-16 max-w-max mx-auto">
+      <div className="flex items-center bg-background border border-border rounded-xl p-1.5 gap-2 mb-16 max-w-full md:max-w-max md:mx-auto">
         {projectsData.map((category) => (
           <button
             key={category.platform}
             onClick={() => setSelectedPlatform(category.platform)}
-            className={`flex items-center gap-3 px-5 py-2.5 rounded-lg font-semibold transition-all duration-300 transform active:scale-95 text-sm md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-hover-target ${
+            className={`flex flex-1 md:flex-initial justify-center items-center gap-3 px-4 md:px-5 py-2 md:py-2.5 rounded-lg font-semibold transition-all duration-300 transform active:scale-95 text-sm md:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-hover-target ${
               selectedPlatform === category.platform
                 ? 'bg-primary text-background'
                 : 'text-text-secondary hover:bg-surface'
             }`}
           >
             <div className="w-5 h-5">{category.icon}</div>
-            <span>{category.platform}</span>
+            <span>{category.platform.replace(' Projects', '')}</span>
           </button>
         ))}
       </div>

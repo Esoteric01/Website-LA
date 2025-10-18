@@ -148,6 +148,14 @@
   .cursor-hover-target.cursor-active::before {
     opacity: 1;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>
 </head>
   <body class="bg-background antialiased">

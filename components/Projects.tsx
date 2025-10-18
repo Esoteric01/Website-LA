@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -360,7 +359,7 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
   return (
     <section ref={sectionRef} id="projects" className="py-20 md:py-28">
       <div className={`text-center mb-12 ${isVisible ? 'motion-safe:animate-fade-in-up' : 'opacity-0'}`}>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">Automation Projects</h2>
+        <h2 className="text-5xl sm:text-6xl font-black font-display mb-4 text-text-main tracking-tighter">Automation Projects</h2>
         <p className="max-w-3xl mx-auto text-xl md:text-2xl text-primary">
           A collection of automation builds powered by AI and integration tools.
         </p>

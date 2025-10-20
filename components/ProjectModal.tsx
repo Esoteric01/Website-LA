@@ -7,6 +7,12 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+const CheckIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary flex-shrink-0 mt-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+    </svg>
+);
+
 const FullscreenEnterIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4h4m12 4V4h-4M4 16v4h4m12-4v4h-4" />
@@ -99,6 +105,59 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     };
   }, [show, handleClose, project, goToPrevious, goToNext]);
 
+  const renderStyledContent = (content: string, heading: string) => {
+    const lines = content.split('\n').filter(line => line.trim() !== '');
+
+    if (heading === 'Process') {
+        return (
+            <div className="space-y-2 text-text-secondary">
+                {lines.map((line, index) => {
+                    const processMatch = line.match(/^(\d+\.\s)(.*?):(.*)/);
+                    if (processMatch) {
+                        const [, number, title, text] = processMatch;
+                        return (
+                            <p key={index}>
+                                {number}
+                                <span className="font-semibold text-text-main">{title}:</span>
+                                {text}
+                            </p>
+                        );
+                    }
+                    return <p key={index}>{line}</p>;
+                })}
+            </div>
+        );
+    }
+
+    if (heading === 'Results') {
+        const introLine = lines.length > 0 && !lines[0].trim().startsWith('-') ? lines[0] : null;
+        const listItems = introLine ? lines.slice(1) : lines;
+        
+        return (
+            <div className="text-text-secondary">
+                {introLine && <p className="mb-2">{introLine}</p>}
+                <ul className="space-y-2">
+                    {listItems.map((line, index) => {
+                         const resultsMatch = line.match(/^\s*-\s(.*)/);
+                         if (resultsMatch) {
+                            const [, text] = resultsMatch;
+                            return (
+                                <li key={index} className="flex items-start">
+                                    <CheckIcon />
+                                    <span>{text}</span>
+                                </li>
+                            );
+                         }
+                         return <li key={index} className="ml-7 list-disc">{line}</li>;
+                    })}
+                </ul>
+            </div>
+        );
+    }
+    
+    return <p className="text-text-secondary whitespace-pre-line">{content}</p>;
+  }
+
   if (!show || !project) return null;
   
   const hasSlideshow = project.images && project.images.length > 0;
@@ -181,19 +240,22 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             const containsHeadings = /^(Overview:|Process:|Results:|🛠️ Process:|✅ Results:)/m.test(project.description);
             if (containsHeadings) {
               return (
-                <div className="text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 space-y-4 sm:space-y-6">
+                <div className="text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 space-y-6">
                   {project.description.split('\n\n').map((paragraph, index) => {
                     const lines = paragraph.split('\n');
                     const firstLine = lines[0];
                     if (firstLine.includes(':')) {
                       const [heading, ...contentStart] = firstLine.split(':');
                       const restOfContent = lines.slice(1);
-                      const fullContent = [contentStart.join(':').trim(), ...restOfContent].join('\n');
+                      const fullContent = [contentStart.join(':').trim(), ...restOfContent].join('\n').trim();
                       const cleanHeading = heading.replace('🛠️', '').replace('✅', '').trim();
+                      
+                      if (!fullContent) return null;
+
                       return (
                         <div key={index}>
-                          <p className="font-bold text-primary text-base sm:text-lg">{cleanHeading}:</p>
-                          <p className="text-text-secondary">{fullContent}</p>
+                          <p className="font-bold text-primary text-base sm:text-lg mb-2">{cleanHeading}:</p>
+                          {renderStyledContent(fullContent, cleanHeading)}
                         </div>
                       );
                     }

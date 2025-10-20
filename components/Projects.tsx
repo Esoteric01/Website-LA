@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -127,14 +126,20 @@ const rawProjectData = [
     icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/n8n.png?raw=true" alt="n8n logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
       { 
-        title: "AI Agent for Facebook Page", 
-        description: "Overview:\nImplemented an AI-powered agent to automatically respond to comments and messages on Facebook pages, improving engagement and response times.\n\nProcess:\nThe n8n workflow listens for new comments and messages via the Facebook Graph API. It then sends the content to the OpenAI API (ChatGPT) to generate a contextually relevant response, which is posted back to Facebook.\n\nResults:\nReduced manual moderation effort by 80%, decreased average response time from hours to seconds, and increased user engagement on posts.",
-        technologyUsed: ["n8n", "Facebook Graph API", "OpenAI API"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20For%20FB%20Page.jpg?raw=true",
-        images: [{
-          label: "n8n Workflow Screenshot",
-          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20For%20FB%20Page.jpg?raw=true"
-        }]
+        title: "AI Agent for Facebook Messenger", 
+        description: "Overview:\nA fully automated, AI-powered agent that delivers instant, context-aware responses to Facebook Page messages, enhancing customer experience and reducing manual effort.\n\nProcess:\nEverything was automated inside n8n, from message detection to AI response delivery:\n1. Webhook Trigger: Detects new messages sent to the Facebook Page via the Graph API.\n2. Respond to Webhook: Acknowledges the event to keep communication smooth.\n3. Filter Node: Identifies which messages can be answered automatically.\n4. FAQ / Knowledge Base: Connects to a Google Docs file containing product information and FAQs.\n5. AI Agent (Gemini): Analyzes the user’s message and generates a context-aware reply based on the FAQ content.\n6. HTTP Request: Sends the AI-generated response back to Facebook Messenger instantly — all within n8n.\n\nResults:\nThe implementation yielded significant improvements in efficiency and customer engagement:\n- Achieved a 100% automated response system, requiring zero manual intervention for common queries.\n- Drastically reduced average reply time from hours to mere seconds.\n- Ensured consistent, on-brand answers by drawing directly from the approved FAQ content.\n- Increased Messenger engagement and improved the page's overall responsiveness score.\n- Boosted customer satisfaction by providing immediate and helpful interactions.",
+        technologyUsed: ["n8n", "Gemini", "Facebook Graph API", "Google Docs"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20for%20Facebook%20Messenger/Workflow%20Screenshot%20from%20N8N.jpg?raw=true",
+        images: [
+          {
+            label: "Workflow Screenshot from N8N",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20for%20Facebook%20Messenger/Workflow%20Screenshot%20from%20N8N.jpg?raw=true"
+          },
+          {
+            label: "Webhook Configuration Screenshot from META",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20AI%20Agent%20for%20Facebook%20Messenger/Webhook%20Configuration%20Screenshot%20from%20META.png?raw=true"
+          }
+        ]
       },
       { 
         title: "Auto-Save Gmail Invoice/Receipt Attachments to Google Drive", 

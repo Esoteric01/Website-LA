@@ -143,21 +143,37 @@ const rawProjectData = [
       },
       { 
         title: "Auto-Save Gmail Invoice/Receipt Attachments to Google Drive", 
-        description: "Overview:\nAutomatically detected invoices and receipts in Gmail and saved them to specific folders in Google Drive.\n\nProcess:\nI used n8n to listen for new Gmail messages containing “invoice” or “receipt.” The workflow filters and moves attachments into Drive with date-based folder naming.\n\nResults:\nEliminated manual saving tasks, reduced lost documents, and ensured 100% invoice capture accuracy.",
-        technologyUsed: ["n8n", "Gmail", "Google Drive"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive.jpg?raw=true",
+        description: `Overview:
+Created an automation that detects emails with invoices or receipts in Gmail and automatically saves the attachments into organized Google Drive folders — eliminating manual sorting and ensuring all financial documents are captured securely.
+
+Process:
+The entire workflow was built in n8n, fully automating the process from email detection to file organization and logging:
+1. Gmail Trigger: Monitors the inbox for new emails.
+2. Filter Node: Checks whether the incoming email contains attachments.
+3. If Statement: Validates if the attachments include keywords like “invoice” or “receipt.”
+4. Switch Node:
+Case 1 (Invoice): Uploads invoice attachments to the Google Drive “Invoices” folder and updates the log file.
+Case 2 (Receipt): Uploads receipt attachments to the Google Drive “Receipts” folder and updates the log file accordingly.
+
+Results:
+- Fully automated attachment management — no manual saving needed.
+- 100% capture accuracy for all invoices and receipts.
+- Reduced time spent on file organization and prevented lost documents.
+- Improved financial tracking through structured folder management and logs.`,
+        technologyUsed: ["n8n", "Gmail", "Google Drive", "Google Sheets"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice/Workflow%20Screenshot%20from%20N8N.jpg?raw=true",
         images: [
           { 
-            label: "N8N Screenshot", 
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive%20-%20N8N.jpg?raw=true" 
+            label: "Workflow Screenshot from N8N", 
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice/Workflow%20Screenshot%20from%20N8N.jpg?raw=true" 
           },
           { 
-            label: "Google Drive Screenshot", 
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive%20-%20Google%20Drive.jpg?raw=true" 
+            label: "Uploaded Attachment files to Google Drive folder", 
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice/Uploaded%20Attachment%20files%20to%20Google%20Drive%20folder.jpg?raw=true" 
           },
           { 
-            label: "Google Sheet Screenshot", 
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice%20&%20Receipt%20Attachments%20to%20Google%20Drive%20-%20Google%20Sheet.jpg?raw=true" 
+            label: "Logs Screenshot from Google Sheet", 
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Auto-Save%20Gmail%20Invoice/Logs%20Screenshot%20from%20Google%20Sheet.jpg?raw=true" 
           },
         ],
       },

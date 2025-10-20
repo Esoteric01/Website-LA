@@ -112,16 +112,19 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         return (
             <div className="space-y-2 text-text-secondary">
                 {lines.map((line, index) => {
-                    const processMatch = line.match(/^(\d+\.\s)(.*?):(.*)/);
+                    const processMatch = line.match(/^(\d+\.\s)(.+?:)(.*)$/);
                     if (processMatch) {
                         const [, number, title, text] = processMatch;
                         return (
                             <p key={index}>
                                 {number}
-                                <span className="font-semibold text-text-main">{title}:</span>
+                                <span className="font-semibold text-text-main">{title}</span>
                                 {text}
                             </p>
                         );
+                    }
+                    if (line.trim().startsWith('Case')) {
+                        return <p key={index} className="pl-6">{line}</p>;
                     }
                     return <p key={index}>{line}</p>;
                 })}

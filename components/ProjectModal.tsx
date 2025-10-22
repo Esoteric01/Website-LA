@@ -118,7 +118,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                         return (
                             <p key={index}>
                                 {number}
-                                <span className="font-semibold text-text-main">{title}</span>
+                                <span className="font-semibold text-white">{title}</span>
                                 {text}
                             </p>
                         );

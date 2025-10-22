@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -179,41 +178,41 @@ Results:
       },
       { 
         title: "Automated Daily Sales & Orders Report via Slack", 
-        description: "Overview:\nCreated an automated system to pull daily sales and orders data from e-commerce APIs and deliver a formatted summary report to key Slack channels.\n\nProcess:\nAn n8n workflow runs on a daily schedule, making API calls to the e-commerce platform. The data is aggregated, formatted into a readable report, and then posted to a designated Slack channel.\n\nResults:\nSaved over 5 hours of manual reporting work per week, provided real-time visibility into sales performance for the management team, and eliminated data entry errors.",
-        technologyUsed: ["n8n", "Slack API", "Google Sheets", "E-commerce API"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack.jpg?raw=true",
+        description: "Overview:\nBuilt an automated reporting system that retrieves daily sales and order data from Google Sheets, analyzes it using AI, and sends a summarized report to Slack every morning at 7:00 AM. The workflow ensures the team receives timely insights without any manual work.\n\nProcess:\nThe entire process is fully automated within n8n, combining data retrieval, AI analysis, and report delivery:\n1. Schedule Trigger: Automatically starts every day at 7:00 AM.\n2. Data Fetching: Retrieves sales transactions from Google Sheets, filtered to include only yesterday’s records.\n3. Code Function: Processes and formats the data into a structured report.\n4. AI Agent (Gemini): Analyzes sales data to identify key insights such as total revenue, performance highlights, and top-selling products.\n5. Slack Integration: Sends a formatted daily report — including date, total revenue, and top product — directly to the Slack channel at 7:00 AM.\n\nResults:\nAutomated daily reporting — no manual updates required.\nConsistent 7:00 AM Slack updates, keeping the team informed every morning.\nImproved visibility into daily sales performance and key metrics.\nReduced manual work and errors, improving team efficiency.",
+        technologyUsed: ["n8n", "Google Sheets", "AI Agent (Gemini)", "Code Node", "Slack", "Schedule Trigger"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack/Workflow%20Screenshot%20from%20N8N.jpg?raw=true",
         images: [
           {
-            label: "N8N Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack.jpg?raw=true"
+            label: "Workflow Screenshot from N8N",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack/Workflow%20Screenshot%20from%20N8N.jpg?raw=true"
           },
           {
-            label: "Google Sheet Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack%20-%20Google%20Sheet.jpg?raw=true"
+            label: "Sample Sales Transaction from Google Sheet",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack/Sample%20Sales%20Transaction%20from%20Google%20Sheet.jpg?raw=true"
           },
           {
-            label: "Slack",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack%20-%20Slack.jpg?raw=true"
+            label: "Daily Sales Report to Slack",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack/Daily%20Sales%20Report%20to%20Slack.jpg?raw=true"
           }
         ]
       },
       { 
         title: "Automated Email Summarization with AI & Slack Notifications", 
-        description: "Overview:\nDeveloped a workflow that automatically summarizes important incoming emails using AI and sends the key highlights to a team Slack channel for quick awareness.\n\nProcess:\nThe n8n workflow triggers on new emails in a specific Gmail folder. The email content is passed to the OpenAI API for summarization. The concise summary is then posted as a notification in Slack, with a link to the original email.\n\nResults:\nDrastically reduced the time spent reading long email threads, ensured critical information was never missed, and improved team-wide communication and response speed.",
-        technologyUsed: ["n8n", "Gmail", "OpenAI API", "Slack"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20and%20Slack%20Notifications.jpg?raw=true",
+        description: "Overview:\nDeveloped an automated workflow that detects lengthy incoming emails, uses AI to summarize them, and sends key insights directly to a Slack channel. This helps teams quickly grasp important updates without reading through long messages.\n\nProcess:\nThe entire automation runs inside n8n, from email detection to AI summarization and Slack delivery:\n1. Email Trigger: The workflow starts automatically when a new email is received.\n2. AI Transform Node: Counts the total number of words in the newly received email.\n3. If Node (Word Count Logic):\n4. True Path (≥300 words): The email is classified as long and passed to the AI Agent node.\n5. False Path (<300 words): The email is considered short, and the workflow ends.\n6. AI Agent (Gemini): Summarizes the long email and generates key insights to highlight the main points and action items.\n7. Slack Integration: Sends the summarized message — along with insights and a link to the original email — to a Slack channel for quick team awareness.\n\nResults:\nSaved time by eliminating the need to read long email threads.\nImproved team communication with concise AI-generated summaries.\nEnsured no important emails were overlooked by automatically surfacing key messages.\nEnhanced productivity with instant Slack updates containing clear highlights and insights.",
+        technologyUsed: ["n8n", "Gmail", "AI Agent (Gemini)", "Slack"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20&%20Slack%20Notifications/Workflow%20Screenshot%20From%20N8N.jpg?raw=true",
         images: [
           {
-            label: "N8N Screen Shot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20and%20Slack%20Notifications%20-%20N8N.jpg?raw=true"
+            label: "Workflow Screenshot From N8N",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20&%20Slack%20Notifications/Workflow%20Screenshot%20From%20N8N.jpg?raw=true"
           },
           {
-            label: "Slack Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20and%20Slack%20Notifications%20-%20Slack.png?raw=true"
+            label: "Sample Long Email Received From Gmail",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20&%20Slack%20Notifications/Sample%20Long%20Email%20Received%20From%20Gmail.png?raw=true"
           },
           {
-            label: "Gmail Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20and%20Slack%20Notifications%20-%20Gmail.png?raw=true"
+            label: "Summarized Message to a Slack Channel",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20&%20Slack%20Notifications/Summarized%20Message%20to%20a%20Slack%20Channel.png?raw=true"
           }
         ],
       },
@@ -224,22 +223,43 @@ Results:
     icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/make.png?raw=true" alt="Make.com logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
       { 
-        title: "Automated Xero to Asana CSV Export", 
-        description: "Overview:\nAutomated the process of exporting financial data from Xero and creating actionable tasks in Asana for team review.\n\nProcess:\nA Make scenario runs on a schedule to fetch new invoices from the Xero API. The data is compiled into a CSV file, uploaded to Google Drive, and a task is created in Asana with a link to the file, notifying the finance team.\n\nResults:\nEliminated manual data entry and report generation, ensured timely review of financial documents, and improved accuracy by removing the risk of human error.",
+        title: "Automated Xero Report Upload to Asana using Make.com", 
+        description: `Overview:
+Developed a Make.com workflow that automatically retrieves and formats accounting data from Xero, then uploads it as a CSV file attachment to a completed task in Asana. This setup simulates the process of generating and attaching an Account Transactions report, closely resembling Xero’s General Ledger Detail report format.
+
+Process:
+1. Trigger Detection: The workflow starts when a task in Asana is marked as complete.
+2. Xero Data Retrieval: A custom API call is made to Xero to fetch transaction-level data for the previous calendar year (January 1 – December 31).
+3. Data Routing and Control: A Router node splits the workflow into two paths:
+Path 1: Uses an Iterator to process array data and store structured entries into Google Sheets.
+Path 2: Implements a Tool node with a 60-second delay to manage the timing and prevent simultaneous processing between both paths.
+4. CSV File Generation: The Google Sheets node retrieves the processed data and converts it into a CSV file using the Tool module in Make.com.
+5. Asana File Upload: The generated CSV file is then automatically attached to the corresponding completed task in Asana.
+
+Results:
+- Automated workflow for report generation and attachment, eliminating manual effort.
+- Consistent CSV formatting that mirrors Xero’s Account Transactions report.
+- Immediate attachment to completed tasks in Asana, ensuring reports are always available.
+- Reliable integration between Xero and Asana, demonstrating scalable automation.
+- Reduced risk of errors from manual handling and data transfer.`,
         technologyUsed: ["Make", "Xero API", "Asana", "Google Sheets"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Make.jpg?raw=true",
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20Report%20Upload%20to%20Asana%20using%20Make.com/Workflow%20Screenshot%20from%20Make.com.jpg?raw=true",
         images: [
           {
-            label: "Make Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Make.jpg?raw=true"
+            label: "Workflow Screenshot from Make.com",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20Report%20Upload%20to%20Asana%20using%20Make.com/Workflow%20Screenshot%20from%20Make.com.jpg?raw=true"
           },
           {
-            label: "Xero Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Xero.jpg?raw=true"
+            label: "Screenshot from Xero",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20Report%20Upload%20to%20Asana%20using%20Make.com/Screenshot%20from%20Xero.jpg?raw=true"
           },
           {
-            label: "Asana",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20to%20Asana%20CSV%20Export%20-%20Asana.jpg?raw=true"
+            label: "Sample Data Gathered from Xero",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20Report%20Upload%20to%20Asana%20using%20Make.com/Sample%20Data%20Gathered%20from%20Xero.png?raw=true"
+          },
+          {
+            label: "Completed task and attached CSV file to Asana",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Xero%20Report%20Upload%20to%20Asana%20using%20Make.com/Completed%20task%20and%20attached%20CSV%20file%20to%20Asana.png?raw=true"
           }
         ]
       },

@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -149,14 +150,13 @@ Process:
 The entire workflow was built in n8n, fully automating the process from email detection to file organization and logging:
 1. Gmail Trigger: Monitors the inbox for new emails.
 2. Filter Node: Checks whether the incoming email contains attachments.
-3. If Statement: Validates if the attachments include keywords like “invoice” or “receipt.”
-4. Switch Node:
-Case 1 (Invoice): Uploads invoice attachments to the Google Drive “Invoices” folder and updates the log file.
-Case 2 (Receipt): Uploads receipt attachments to the Google Drive “Receipts” folder and updates the log file accordingly.
+3. Keyword Validation: An If node validates if the attachments include keywords like “invoice” or “receipt.”
+4. Conditional Routing & Saving: A Switch Node routes attachments to the correct folder. Invoices are saved to an “Invoices” folder, while receipts go to a “Receipts” folder. A Google Sheet is updated to log each saved file.
 
 Results:
+The automation delivered significant efficiency gains:
 - Fully automated attachment management — no manual saving needed.
-- 100% capture accuracy for all invoices and receipts.
+- Achieved 100% capture accuracy for all invoices and receipts.
 - Reduced time spent on file organization and prevented lost documents.
 - Improved financial tracking through structured folder management and logs.`,
         technologyUsed: ["n8n", "Gmail", "Google Drive", "Google Sheets"],
@@ -178,7 +178,7 @@ Results:
       },
       { 
         title: "Automated Daily Sales & Orders Report via Slack", 
-        description: "Overview:\nBuilt an automated reporting system that retrieves daily sales and order data from Google Sheets, analyzes it using AI, and sends a summarized report to Slack every morning at 7:00 AM. The workflow ensures the team receives timely insights without any manual work.\n\nProcess:\nThe entire process is fully automated within n8n, combining data retrieval, AI analysis, and report delivery:\n1. Schedule Trigger: Automatically starts every day at 7:00 AM.\n2. Data Fetching: Retrieves sales transactions from Google Sheets, filtered to include only yesterday’s records.\n3. Code Function: Processes and formats the data into a structured report.\n4. AI Agent (Gemini): Analyzes sales data to identify key insights such as total revenue, performance highlights, and top-selling products.\n5. Slack Integration: Sends a formatted daily report — including date, total revenue, and top product — directly to the Slack channel at 7:00 AM.\n\nResults:\nAutomated daily reporting — no manual updates required.\nConsistent 7:00 AM Slack updates, keeping the team informed every morning.\nImproved visibility into daily sales performance and key metrics.\nReduced manual work and errors, improving team efficiency.",
+        description: "Overview:\nBuilt an automated reporting system that retrieves daily sales and order data from Google Sheets, analyzes it using AI, and sends a summarized report to Slack every morning at 7:00 AM. The workflow ensures the team receives timely insights without any manual work.\n\nProcess:\nThe entire process is fully automated within n8n, combining data retrieval, AI analysis, and report delivery:\n1. Schedule Trigger: Automatically starts every day at 7:00 AM.\n2. Data Fetching: Retrieves sales transactions from Google Sheets, filtered to include only yesterday’s records.\n3. Code Function: Processes and formats the data into a structured report.\n4. AI Agent (Gemini): Analyzes sales data to identify key insights such as total revenue, performance highlights, and top-selling products.\n5. Slack Integration: Sends a formatted daily report — including date, total revenue, and top product — directly to the Slack channel at 7:00 AM.\n\nResults:\nThis automated system delivered several key benefits:\n- Automated daily reporting — no manual updates required.\n- Consistent 7:00 AM Slack updates, keeping the team informed every morning.\n- Improved visibility into daily sales performance and key metrics.\n- Reduced manual work and errors, improving team efficiency.",
         technologyUsed: ["n8n", "Google Sheets", "AI Agent (Gemini)", "Code Node", "Slack", "Schedule Trigger"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Daily%20Sales%20&%20Orders%20Report%20via%20Slack/Workflow%20Screenshot%20from%20N8N.jpg?raw=true",
         images: [
@@ -198,7 +198,7 @@ Results:
       },
       { 
         title: "Automated Email Summarization with AI & Slack Notifications", 
-        description: "Overview:\nDeveloped an automated workflow that detects lengthy incoming emails, uses AI to summarize them, and sends key insights directly to a Slack channel. This helps teams quickly grasp important updates without reading through long messages.\n\nProcess:\nThe entire automation runs inside n8n, from email detection to AI summarization and Slack delivery:\n1. Email Trigger: The workflow starts automatically when a new email is received.\n2. AI Transform Node: Counts the total number of words in the newly received email.\n3. If Node (Word Count Logic):\n4. True Path (≥300 words): The email is classified as long and passed to the AI Agent node.\n5. False Path (<300 words): The email is considered short, and the workflow ends.\n6. AI Agent (Gemini): Summarizes the long email and generates key insights to highlight the main points and action items.\n7. Slack Integration: Sends the summarized message — along with insights and a link to the original email — to a Slack channel for quick team awareness.\n\nResults:\nSaved time by eliminating the need to read long email threads.\nImproved team communication with concise AI-generated summaries.\nEnsured no important emails were overlooked by automatically surfacing key messages.\nEnhanced productivity with instant Slack updates containing clear highlights and insights.",
+        description: "Overview:\nDeveloped an automated workflow that detects lengthy incoming emails, uses AI to summarize them, and sends key insights directly to a Slack channel. This helps teams quickly grasp important updates without reading through long messages.\n\nProcess:\nThe entire automation runs inside n8n, from email detection to AI summarization and Slack delivery:\n1. Email Trigger: The workflow starts automatically when a new email is received.\n2. Word Count Analysis: An AI Transform Node counts the total number of words in the newly received email.\n3. Conditional Logic: An If Node checks if the word count is 300 or more. If the email is short, the workflow ends.\n4. AI Summarization: If the email is long, it is passed to a Gemini AI Agent to summarize the content and generate key insights.\n5. Slack Notification: Sends the summarized message—along with insights and a link to the original email—to a Slack channel for quick team awareness.\n\nResults:\nThis workflow provided immediate value to team communication:\n- Saved time by eliminating the need to read long email threads.\n- Improved team communication with concise AI-generated summaries.\n- Ensured no important emails were overlooked by automatically surfacing key messages.\n- Enhanced productivity with instant Slack updates containing clear highlights and insights.",
         technologyUsed: ["n8n", "Gmail", "AI Agent (Gemini)", "Slack"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Email%20Summarization%20with%20AI%20&%20Slack%20Notifications/Workflow%20Screenshot%20From%20N8N.jpg?raw=true",
         images: [
@@ -228,15 +228,15 @@ Results:
 Developed a Make.com workflow that automatically retrieves and formats accounting data from Xero, then uploads it as a CSV file attachment to a completed task in Asana. This setup simulates the process of generating and attaching an Account Transactions report, closely resembling Xero’s General Ledger Detail report format.
 
 Process:
+The workflow operates through a series of automated steps in Make.com:
 1. Trigger Detection: The workflow starts when a task in Asana is marked as complete.
-2. Xero Data Retrieval: A custom API call is made to Xero to fetch transaction-level data for the previous calendar year (January 1 – December 31).
-3. Data Routing and Control: A Router node splits the workflow into two paths:
-Path 1: Uses an Iterator to process array data and store structured entries into Google Sheets.
-Path 2: Implements a Tool node with a 60-second delay to manage the timing and prevent simultaneous processing between both paths.
-4. CSV File Generation: The Google Sheets node retrieves the processed data and converts it into a CSV file using the Tool module in Make.com.
-5. Asana File Upload: The generated CSV file is then automatically attached to the corresponding completed task in Asana.
+2. Xero Data Retrieval: A custom API call is made to Xero to fetch transaction-level data for the previous calendar year.
+3. Data Processing & Control: A Router splits the workflow. One path iterates and structures the data into Google Sheets, while a second path manages timing with a delay to prevent conflicts.
+4. CSV File Generation: The Google Sheets node retrieves the processed data and converts it into a CSV file using a Tool module.
+5. Asana File Upload: The generated CSV file is automatically attached to the corresponding completed task in Asana.
 
 Results:
+The results of this automation include:
 - Automated workflow for report generation and attachment, eliminating manual effort.
 - Consistent CSV formatting that mirrors Xero’s Account Transactions report.
 - Immediate attachment to completed tasks in Asana, ensuring reports are always available.
@@ -265,21 +265,37 @@ Results:
       },
       { 
         title: "Automated Gmail Attachment Organizer for Google Drive", 
-        description: "Overview:\nCreated an intelligent system to automatically scan incoming Gmail attachments and organize them into categorized folders within Google Drive.\n\nProcess:\nThe Make scenario watches for new emails with attachments. It uses filters to identify keywords (e.g., 'invoice,' 'report'). Based on these rules, it saves the attachment to the corresponding folder in Google Drive, renaming the file for consistency.\n\nResults:\nSaved countless hours of manual sorting, created a perfectly organized document repository, and prevented important files from being lost in the inbox.",
-        technologyUsed: ["Make", "Gmail", "Google Drive"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive.jpg?raw=true",
+        description: `Overview:
+Developed a Make.com workflow that intelligently scans incoming Gmail attachments, analyzes their content, renames them based on context, and automatically organizes them into Google Drive. This automation eliminates manual file management and ensures a clean, searchable file structure.
+
+Process:
+The workflow operates through a series of automated steps in Make.com:
+1. Email Trigger: The workflow starts when a new email with an attachment is received in Gmail.
+2. Attachment Review (Gemini Analysis): The Gemini module analyzes the email and its attachments to understand the content and context.
+3. Intelligent File Renaming: Gemini generates a descriptive filename related to the attachment’s content..
+4. Google Drive Upload: The renamed attachment is uploaded to a designated folder in Google Drive for easy access and organization.
+5. Activity Logging: A Google Sheets log is automatically updated with details such as the timestamp, original filename, new filename, file type, and Google Drive file link.
+
+Results:
+The results of this automation include:
+- Automated workflow for sorting and organizing Gmail attachments, eliminating manual effort.
+- Intelligent file organization using context-based naming and structured folder placement.
+- Detailed activity logging in Google Sheets for quick file tracking and auditing.
+- Increased productivity from time saved on manual attachment management.`,
+        technologyUsed: ["Make.com", "Gmail", "Gemini", "Google Drive", "Google Sheets"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive/Workflow%20Screenshot%20from%20MAKE.jpg?raw=true",
         images: [
           {
-            label: "Make Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Make.jpg?raw=true"
+            label: "Workflow Screenshot from MAKE",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive/Workflow%20Screenshot%20from%20MAKE.jpg?raw=true"
           },
           {
-            label: "Google Drive Screenshot",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Google%20Drive.jpg?raw=true"
+            label: "Uploaded Attachments from Gmail to Google Drive",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive/Uploaded%20Attachments%20from%20Gmail%20to%20Google%20Drive.jpg?raw=true"
           },
           {
-            label: "Google Sheet",
-            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive%20-%20Google%20Sheet.jpg?raw=true"
+            label: "Logs from Gmail Attachments Recorded to Google Sheet",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/MAKE%20-%20Automated%20Gmail%20Attachment%20Organizer%20for%20Google%20Drive/Logs%20from%20Gmail%20Attachments%20Recorded%20to%20Google%20Sheet.jpg?raw=true"
           }
         ]
       },
@@ -291,7 +307,21 @@ Results:
     projects: [
       { 
         title: "AI Content Repurposing", 
-        description: "Overview:\nBuilt an AI-driven automation that repurposes long-form blog posts into various short-form content formats, such as social media captions, email newsletter snippets, and LinkedIn articles.\n\nProcess:\nWhen a new blog post is published, a Zapier workflow sends the content to the OpenAI API with specific prompts to generate different content variations. These repurposed snippets are then saved as drafts in content management tools.\n\nResults:\nIncreased content output by 300% without additional writing effort, maintained a consistent brand voice across all platforms, and significantly boosted social media engagement.",
+        description: `Overview:
+Built an AI-driven automation that repurposes long-form blog posts into various short-form content formats, such as social media captions, email newsletter snippets, and LinkedIn articles.
+
+Process:
+The automation is powered by a Zapier workflow:
+1. Trigger: The Zap activates when a new blog post is published.
+2. AI Generation: The workflow sends the blog content to the OpenAI API.
+3. Content Variation: Custom prompts instruct the AI to generate different content variations for various platforms.
+4. Draft & Save: The repurposed snippets are then saved as drafts in the appropriate content management tools (e.g., Buffer, Google Docs).
+
+Results:
+This system streamlined the content creation process significantly:
+- Increased content output by 300% without additional writing effort.
+- Maintained a consistent brand voice across all platforms.
+- Significantly boosted social media engagement by providing a steady stream of relevant content.`,
         technologyUsed: ["Zapier", "OpenAI API", "Google Docs", "Buffer"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing.jpg?raw=true",
         images: [{
@@ -301,7 +331,21 @@ Results:
       },
       { 
         title: "CRM Workflow Automation in Asana", 
-        description: "Overview:\nStreamlined the entire client onboarding process by automating task creation, folder setup, and team notifications within Asana and Google Drive.\n\nProcess:\nA Zap triggers when a lead is moved to an 'Onboarding' stage. The workflow automatically creates a new project in Asana from a template, generates a client folder in Google Drive, and sends a confirmation notification in Slack.\n\nResults:\nReduced onboarding time by 90%, eliminated manual setup errors, and provided a consistent and professional experience for every new client.",
+        description: `Overview:
+Streamlined the entire client onboarding process by automating task creation, folder setup, and team notifications within Asana and Google Drive.
+
+Process:
+A Zapier workflow manages the end-to-end onboarding process:
+1. Trigger: A Zap initiates when a lead is moved to an 'Onboarding' stage in a CRM.
+2. Project Creation: The workflow automatically creates a new project in Asana from a predefined template.
+3. Folder Generation: A new, standardized client folder is created in Google Drive.
+4. Team Notification: A confirmation notification is sent to the team's Slack channel to keep everyone informed.
+
+Results:
+The automated onboarding workflow had a major impact on efficiency:
+- Reduced onboarding time by 90%, allowing the team to focus on client work faster.
+- Eliminated manual setup errors, ensuring consistency.
+- Provided a seamless and professional experience for every new client.`,
         technologyUsed: ["Zapier", "Asana", "Google Drive", "Slack"],
         imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20CRM%20Workflow%20Automation%20in%20Asana.jpg?raw=true",
         images: [{

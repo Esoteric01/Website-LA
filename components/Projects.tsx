@@ -308,26 +308,37 @@ The results of this automation include:
       { 
         title: "AI Content Repurposing", 
         description: `Overview:
-Built an AI-driven automation that repurposes long-form blog posts into various short-form content formats, such as social media captions, email newsletter snippets, and LinkedIn articles.
+Developed an AI-powered automation in Zapier that transforms uploaded audio or video files into multiple short-form content types such as blog posts, Instagram captions, and LinkedIn articles. The system automatically transcribes, repurposes, and publishes content, ensuring consistent online presence with minimal manual work.
 
 Process:
-The automation is powered by a Zapier workflow:
-1. Trigger: The Zap activates when a new blog post is published.
-2. AI Generation: The workflow sends the blog content to the OpenAI API.
-3. Content Variation: Custom prompts instruct the AI to generate different content variations for various platforms.
-4. Draft & Save: The repurposed snippets are then saved as drafts in the appropriate content management tools (e.g., Buffer, Google Docs).
+1. File Upload Trigger: The workflow starts when a new audio or video file is uploaded to a designated Google Drive folder.
+2. Transcription Generation: The AI by Zapier module converts the uploaded file into a text transcript.
+3. Blog Post Creation: The transcript is used by AI by Zapier to generate long-form blog content.
+4. Looping Logic: A Looping by Zapier module processes multiple short-form content variations for social media.
+5. Conditional Paths: Paths by Zapier determine where the content will be published (e.g., Instagram or LinkedIn) based on keywords or topics.
+6. Automated Publishing: The generated posts are automatically published to social media platforms, completing the repurposing cycle.
 
 Results:
-This system streamlined the content creation process significantly:
-- Increased content output by 300% without additional writing effort.
-- Maintained a consistent brand voice across all platforms.
-- Significantly boosted social media engagement by providing a steady stream of relevant content.`,
-        technologyUsed: ["Zapier", "OpenAI API", "Google Docs", "Buffer"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing.jpg?raw=true",
-        images: [{
-          label: "Zapier AI Content Workflow",
-          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing.jpg?raw=true"
-        }]
+- Fully automated content repurposing, from file upload to social media posting.
+- Cut content creation time by over 70%, enabling consistent daily publishing.
+- Maintained brand tone and relevance across multiple platforms.
+- Eliminated repetitive tasks, allowing focus on creative and strategy work.`,
+        technologyUsed: ["Zapier", "AI by Zapier", "Google Drive", "Social Media Platforms"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing/Workflow%20Screenshot%20from%20Zapier.jpg?raw=true",
+        images: [
+          {
+            label: "Workflow Screenshot from Zapier",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing/Workflow%20Screenshot%20from%20Zapier.jpg?raw=true"
+          },
+          {
+            label: "Sample Video File Uploaded to Google Drive",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing/Sample%20Video%20File%20Uploaded%20to%20Google%20Drive.png?raw=true"
+          },
+          {
+            label: "Screenshot Post from Facebook Page",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing/Screenshot%20Post%20from%20Facebook%20Page.png?raw=true"
+          }
+        ]
       },
       { 
         title: "CRM Workflow Automation in Asana", 

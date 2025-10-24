@@ -1,80 +1,5 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Icons } from '../constants';
-
-interface ChoiceModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  subject: string;
-  body: string;
-  recipientEmail: string;
-}
-
-const ChoiceModal: React.FC<ChoiceModalProps> = ({ isOpen, onClose, subject, body, recipientEmail }) => {
-  const [isClosing, setIsClosing] = useState(false);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsClosing(false);
-    }
-  }, [isOpen]);
-
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
-
-  const handleGmailClick = () => {
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-    handleClose();
-  };
-
-  const handleEmailAppClick = () => {
-    const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-    handleClose();
-  };
-
-  if (!isOpen && !isClosing) return null;
-
-  return (
-    <div
-      className={`fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
-      onClick={handleClose}
-      aria-modal="true"
-      role="dialog"
-    >
-      <div
-        className={`bg-surface rounded-xl shadow-2xl w-full max-w-md transform border border-border p-8 text-center ${isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h3 className="text-2xl font-bold font-display text-text-main mb-3">How would you like to send?</h3>
-        <p className="text-text-secondary mb-6">Please choose your preferred email client to send the inquiry.</p>
-        
-        <div className="space-y-4">
-          <button
-            onClick={handleGmailClick}
-            className="w-full flex items-center justify-center gap-3 bg-border hover:bg-border/80 text-text-main font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target"
-          >
-            <Icons.IconGmail />
-            Open in Gmail (Browser)
-          </button>
-          <button
-            onClick={handleEmailAppClick}
-            className="w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-background font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target"
-          >
-            <Icons.IconEmailApp />
-            Open Email App (Desktop)
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 
 const Contact: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -100,8 +25,6 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [isChoiceModalOpen, setChoiceModalOpen] = useState(false);
-  const [emailContent, setEmailContent] = useState({ subject: '', body: '' });
 
 
   useEffect(() => {
@@ -197,61 +120,71 @@ const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
   
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
     setFormStatus('submitting');
     
-    try {
-      const subject = `Project Inquiry from ${formData.fullName}`;
-      
-      const needsHelpWith = [
+    const FORM_ENDPOINT = "https://formspree.io/f/mrbynjyp";
+
+    const needsText = [
         ...formData.needs,
-        formData.otherNeed ? `Other: ${formData.otherNeed}` : ''
-      ].filter(Boolean).join(', ');
-      
-      let discoveryText = 'Not specified';
-      if (formData.discoveryDate && formData.discoveryTime) {
-          discoveryText = `${formData.discoveryDate} at ${formData.discoveryTime}`;
-          if (formData.timezone) {
-              const tzLabel = timezones.find(tz => tz.value === formData.timezone)?.label || formData.timezone;
-              discoveryText += ` (${tzLabel})`;
-          }
-      }
+        ...(formData.otherNeed ? [`Other: ${formData.otherNeed}`] : [])
+    ].map(n => `- ${n}`).join('\n');
 
-      const emailBody = `Full Name:
-${formData.fullName}
+    const discoveryText = (formData.discoveryDate || formData.discoveryTime || formData.timezone)
+        ? `  Date: ${formData.discoveryDate || 'N/A'}\n  Time: ${formData.discoveryTime || 'N/A'}\n  Timezone: ${formData.timezone || 'N/A'}`
+        : 'Not requested';
 
-Email Address:
-${formData.email}
+    const summary = `
+New Inquiry Summary
+--------------------------
+Name: ${formData.fullName}
+Email: ${formData.email}
+Company: ${formData.company || 'N/A'}
 
-Company / Organization:
-${formData.company || 'Not provided'}
+Needs:
+${needsText}
 
-Needs Help With:
-${needsHelpWith}
-
-Problem or Goal:
+Problem/Goal:
 ${formData.problemGoal}
 
-Project Timeline:
-${formData.timeline}
+Timeline: ${formData.timeline}
 
-Requested Discovery Call Time:
+Discovery Call:
 ${discoveryText}
 
-Anything Else to Share:
+Additional Info:
 ${formData.anythingElse || 'None'}
-      `;
+`;
+    
+    const dataToSend = {
+      ...formData,
+      _subject: `New Inquiry from ${formData.fullName}`,
+      summary: summary,
+    };
 
-      setEmailContent({ subject, body: emailBody.trim() });
-      setChoiceModalOpen(true);
-      setFormStatus('success');
-      
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(dataToSend)
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData(initialFormData);
+      } else {
+        console.error('Form submission failed:', await response.json());
+        setFormStatus('error');
+      }
     } catch (error) {
-      console.error('Error preparing for email:', error);
+      console.error('Submission error:', error);
       setFormStatus('error');
     }
   };
@@ -346,14 +279,6 @@ ${formData.anythingElse || 'None'}
 
 
   return (
-    <>
-    <ChoiceModal
-        isOpen={isChoiceModalOpen}
-        onClose={() => setChoiceModalOpen(false)}
-        subject={emailContent.subject}
-        body={emailContent.body}
-        recipientEmail="loizalmerino@gmail.com"
-      />
     <section ref={sectionRef} id="contact" className="py-20 md:py-28 relative overflow-hidden bg-background">
       <div 
         ref={glowRef}
@@ -403,7 +328,7 @@ ${formData.anythingElse || 'None'}
              <h3 className="text-3xl font-bold font-display text-text-main mb-2">Share Your Requirements</h3>
              <p className="text-text-secondary mb-6">Tell me about your project, and I’ll reach out to discuss the next steps with you.</p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
               <div className="space-y-6">
                 <div>
                   <label htmlFor="fullName" className="block text-sm font-medium text-text-secondary mb-1">Full Name *</label>
@@ -486,29 +411,17 @@ ${formData.anythingElse || 'None'}
 
                 <div>
                   <button type="submit" disabled={formStatus === 'submitting'} className="w-full bg-primary hover:bg-primary/90 text-background font-bold py-3 px-6 rounded-lg transition-all duration-300 transform active:scale-95 cursor-hover-target disabled:opacity-50 disabled:cursor-not-allowed">
-                    {formStatus === 'submitting' ? 'Preparing...' : 'Send Inquiry'}
+                    {formStatus === 'submitting' ? 'Submitting...' : 'Send Inquiry'}
                   </button>
                 </div>
               </div>
             </form>
-             {formStatus === 'success' && !isChoiceModalOpen && <p className="mt-4 text-center text-primary bg-primary/10 p-3 rounded-md">✅ Thank you! Please choose how to send your email.</p>}
-             {formStatus === 'error' && <p className="mt-4 text-center text-red-500 bg-red-500/10 p-3 rounded-md">❌ Error! Could not prepare the email. Please try again or contact me directly.</p>}
-            <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4 text-sm text-yellow-300 flex items-start gap-3 mt-6 text-left">
-                <div className="flex-shrink-0 mt-0.5 text-yellow-400">
-                    <Icons.IconWarning />
-                </div>
-                <div>
-                    <h4 className="font-bold text-yellow-200">Please Note</h4>
-                    <p className="text-yellow-400/90 mt-1">
-                      After submitting, you'll be prompted to open your email client. Please ensure you are logged in first to avoid losing your form data. I'll respond within 24-48 hours.
-                    </p>
-                </div>
-            </div>
+             {formStatus === 'success' && <p className="mt-4 text-center text-primary bg-primary/10 p-3 rounded-md">✅ Thank you! Your message has been sent. I'll get back to you shortly.</p>}
+             {formStatus === 'error' && <p className="mt-4 text-center text-red-500 bg-red-500/10 p-3 rounded-md">❌ Error! Something went wrong. Please try again or contact me directly.</p>}
           </div>
         </div>
       </div>
     </section>
-    </>
   );
 };
 

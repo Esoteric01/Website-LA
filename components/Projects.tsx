@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -339,30 +340,6 @@ Results:
             url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20AI%20Content%20Repurposing/Screenshot%20Post%20from%20Facebook%20Page.png?raw=true"
           }
         ]
-      },
-      { 
-        title: "CRM Workflow Automation in Asana", 
-        description: `Overview:
-Streamlined the entire client onboarding process by automating task creation, folder setup, and team notifications within Asana and Google Drive.
-
-Process:
-A Zapier workflow manages the end-to-end onboarding process:
-1. Trigger: A Zap initiates when a lead is moved to an 'Onboarding' stage in a CRM.
-2. Project Creation: The workflow automatically creates a new project in Asana from a predefined template.
-3. Folder Generation: A new, standardized client folder is created in Google Drive.
-4. Team Notification: A confirmation notification is sent to the team's Slack channel to keep everyone informed.
-
-Results:
-The automated onboarding workflow had a major impact on efficiency:
-- Reduced onboarding time by 90%, allowing the team to focus on client work faster.
-- Eliminated manual setup errors, ensuring consistency.
-- Provided a seamless and professional experience for every new client.`,
-        technologyUsed: ["Zapier", "Asana", "Google Drive", "Slack"],
-        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20CRM%20Workflow%20Automation%20in%20Asana.jpg?raw=true",
-        images: [{
-          label: "Asana Onboarding Automation",
-          url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/ZAPIER%20-%20CRM%20Workflow%20Automation%20in%20Asana.jpg?raw=true"
-        }]
       },
     ],
   },

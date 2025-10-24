@@ -176,7 +176,7 @@ const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
                 <div className="lg:col-span-2 lg:sticky lg:top-12 self-start">
                     <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: '100ms' }}>
                         <img 
-                            src="https://github.com/Esoteric01/Portfolio-Images/blob/main/Formal.jpg?raw=true"
+                            src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Hero%20Section%20Images/Know%20Me%20More/Image%201.jpg?raw=true"
                             alt="Portrait of Loiz Almerino"
                             className="rounded-2xl w-full max-w-sm mx-auto object-cover ring-2 ring-primary/50 shadow-lg"
                         />

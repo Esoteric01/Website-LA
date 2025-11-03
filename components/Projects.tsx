@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import type { Project, ProjectCategory } from '../types';
 
@@ -126,6 +125,42 @@ const rawProjectData = [
     platform: "n8n Projects",
     icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/n8n.png?raw=true" alt="n8n logo" className="h-full w-full object-contain" loading="lazy" />,
     projects: [
+      {
+        title: "Automated Lead Nurturing System",
+        description: "Overview:\nA fully automated lead management system that captures Facebook Page form submissions, analyzes the lead’s interest with AI, sends personalized emails, logs the lead in Google Sheets, and notifies the sales team on Slack. The system improves response time, ensures accurate lead tracking, and reduces manual follow-up effort.\n\nProcess:\nEverything is automated inside n8n, from lead capture to team notification:\n1. Webhook Trigger: Detects new submissions from the Facebook Page Contact Us form (Name, Phone Number, Email, Inquiry/Interest).\n2. Respond to Webhook: Immediately acknowledges the lead submission to ensure smooth communication.\n3. Function Node: Parses the raw Facebook form data and splits it into structured fields: Full Name, Phone Number, Email, Inquiry/Interest. Generates a unique 5-digit ID for each lead.\n4. Google Sheets Node: Appends each lead to the leads database with columns for ID, Name, Email, Phone, Inquiry/Interest, Date, and Status (“New”).\n5. AI Agent (Gemini): Analyzes the lead’s inquiry to determine if it is related to AI Automation Services and generates a suggested email draft.\n6. IF Node: Routes the workflow based on AI analysis:\nYES (related): Sends a personalized follow-up email, updates Google Sheets status to “Emailed,” and notifies the sales team on Slack.\nNO (not related): Sends a general email, updates Google Sheets status to “Emailed (Non-AI),” and optionally notifies Slack.\n7. Email Node (Gmail / SMTP): Sends the appropriate personalized email to the lead using dynamic variables.\n8. Slack Node: Posts a notification to the sales team with the new lead details: Name, Email, Inquiry/Interest, and Status.\n\nResults:\nThe implementation delivered measurable improvements in lead management and team efficiency:\n- Achieved 100% automated lead processing, requiring no manual intervention for initial contact.\n- Reduced lead follow-up time from hours to seconds.\n- Ensured consistent and professional communication with personalized emails based on AI analysis.\n- Maintained an up-to-date leads log in Google Sheets, with unique IDs preventing duplication.\n- Increased sales team efficiency with instant Slack notifications for new leads.",
+        technologyUsed: ["n8n", "Function Node (JavaScript)", "Google Sheets", "AI Agent (Gemini)", "Gmail", "Slack"],
+        imageUrl: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Workflow%20Screenshot%20from%20N8N.png?raw=true",
+        images: [
+          {
+            label: "Workflow Screenshot from N8N",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Workflow%20Screenshot%20from%20N8N.png?raw=true"
+          },
+          {
+            label: "Webhook Configurations from Facebook",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Webhook%20Configurations%20from%20Facebook.png?raw=true"
+          },
+          {
+            label: "Contact Button & Form from Facebook Page",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Contact%20Button%20&%20Form%20from%20Facebook%20Page.png?raw=true"
+          },
+          {
+            label: "Stored Data to Google Sheet from Facebook Page",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Stored%20Data%20to%20Google%20Sheet%20from%20Facebook%20Page.png?raw=true"
+          },
+          {
+            label: "Sample Automated Email Acknowledgement using Gmail",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Sample%20Automated%20Email%20Acknowledgement%20using%20Gmail.png?raw=true"
+          },
+          {
+            label: "Sample Automated Email Acknowledgement from non-AI inquiries using Gmail",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Sample%20Automated%20Email%20Acknowledgement%20from%20non-AI%20inquiries%20using%20Gmail.png?raw=true"
+          },
+          {
+            label: "Sample Lead Update Message to Slack Channel",
+            url: "https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Projects%20Images/N8N%20-%20Automated%20Lead%20Nurturing%20System/Sample%20Lead%20Update%20Message%20to%20Slack%20Channel.png?raw=true"
+          }
+        ]
+      },
       { 
         title: "AI Agent for Facebook Messenger", 
         description: "Overview:\nA fully automated, AI-powered agent that delivers instant, context-aware responses to Facebook Page messages, enhancing customer experience and reducing manual effort.\n\nProcess:\nEverything was automated inside n8n, from message detection to AI response delivery:\n1. Webhook Trigger: Detects new messages sent to the Facebook Page via the Graph API.\n2. Respond to Webhook: Acknowledges the event to keep communication smooth.\n3. Filter Node: Identifies which messages can be answered automatically.\n4. FAQ / Knowledge Base: Connects to a Google Docs file containing product information and FAQs.\n5. AI Agent (Gemini): Analyzes the user’s message and generates a context-aware reply based on the FAQ content.\n6. HTTP Request: Sends the AI-generated response back to Facebook Messenger instantly — all within n8n.\n\nResults:\nThe implementation yielded significant improvements in efficiency and customer engagement:\n- Achieved a 100% automated response system, requiring zero manual intervention for common queries.\n- Drastically reduced average reply time from hours to mere seconds.\n- Ensured consistent, on-brand answers by drawing directly from the approved FAQ content.\n- Increased Messenger engagement and improved the page's overall responsiveness score.\n- Boosted customer satisfaction by providing immediate and helpful interactions.",

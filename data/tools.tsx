@@ -34,40 +34,16 @@ export const toolsData: Tool[] = [
     description: "Integrate Google's powerful generative AI models.",
   },
   {
-    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Stack%20Icons/copilot.png?raw=true" alt="Copilot logo" className="h-full w-full object-contain" loading="lazy" />,
-    name: 'Copilot',
-    category: 'AI Tools',
-    description: 'Use AI to accelerate development and tasks.',
-  },
-  {
     icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Stack%20Icons/hubspot.png?raw=true" alt="HubSpot logo" className="h-full w-full object-contain" loading="lazy" />,
     name: 'HubSpot',
     category: 'CRMs',
     description: 'Inbound marketing, sales, and service software.',
   },
   {
-    icon: <img src="https://raw.githubusercontent.com/Esoteric01/loizalmerino.com-assets/903f3094232f84299a6298b5c614b61eecb1f374/Automation%20Stack%20Icons/pipedrive.svg" alt="Pipedrive logo" className="h-full w-full object-contain" loading="lazy" />,
-    name: 'Pipedrive',
-    category: 'CRMs',
-    description: 'Sales CRM for small teams with big ambitions.',
-  },
-  {
-    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Stack%20Icons/gohighlevel.webp?raw=true" alt="GoHighLevel logo" className="h-full w-full object-contain" loading="lazy" />,
-    name: 'GoHighLevel',
-    category: 'CRMs',
-    description: 'All-in-one platform for agencies and marketers.',
-  },
-  {
     icon: <img src="https://raw.githubusercontent.com/Esoteric01/loizalmerino.com-assets/903f3094232f84299a6298b5c614b61eecb1f374/Automation%20Stack%20Icons/asana.svg" alt="Asana logo" className="h-full w-full object-contain" loading="lazy" />,
     name: 'Asana',
     category: 'Project & Collaboration Tools',
     description: 'Work management platform for teams.',
-  },
-  {
-    icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Stack%20Icons/clickup.png?raw=true" alt="ClickUp logo" className="h-full w-full object-contain" loading="lazy" />,
-    name: 'ClickUp',
-    category: 'Project & Collaboration Tools',
-    description: 'One app to replace them all. For tasks, docs, chat, goals.',
   },
   {
     icon: <img src="https://github.com/Esoteric01/loizalmerino.com-assets/blob/main/Automation%20Stack%20Icons/trello.png?raw=true" alt="Trello logo" className="h-full w-full object-contain" loading="lazy" />,

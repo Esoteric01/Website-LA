@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import type { Service } from '../types';
 import { Icons } from '../constants';
@@ -27,35 +28,35 @@ const servicesData: Service[] = [
   },
   {
     icon: <Icons.IconServiceCRMAndMarketing />,
-    title: "CRM Optimization",
-    description: "I streamline CRM workflows in HubSpot, Pipedrive, and GoHighLevel to automate lead nurturing, manage sales pipelines, and ensure no opportunity is missed.",
+    title: "CRM & Lead Integrations",
+    description: "I bridge the gap between your lead sources and HubSpot, automating the data flow from Facebook Forms and other tools so your CRM stays updated without manual entry.",
     features: [
-      "Lead scoring and routing",
-      "Automated follow-ups and tasks",
-      "Sales pipeline management",
-      "Data synchronization"
+      "Connecting Apps to HubSpot",
+      "Facebook Lead Form Syncing",
+      "Automated Lead Routing",
+      "Instant Lead Notifications"
     ]
   },
   {
     icon: <Icons.IconServiceProductivity />,
-    title: "Google Workspace & Productivity Automation",
-    description: "I create custom automations for Gmail, Sheets, and Docs to manage data, generate reports automatically, and significantly boost your team's day-to-day productivity.",
+    title: "Productivity Automation",
+    description: "I create custom automations for Google Workspace to manage data, generate reports automatically, and significantly boost your team's day-to-day productivity.",
     features: [
       "Automated email parsing",
-      "Dynamic report generation in Sheets",
+      "Dynamic report generation",
       "Document creation from templates",
-      "Calendar and task management"
+      "Calendar synchronization"
     ]
   },
   {
     icon: <Icons.IconServiceAPI />,
     title: "API & Webhook Integrations",
-    description: "I build custom API and webhook integrations to ensure seamless, real-time data flow across your entire tech stack, even for services that don't natively connect.",
+    description: "I build custom API and webhook integrations to ensure seamless, real-time data flow across your entire tech stack for services that don't natively connect.",
     features: [
       "Custom REST API connections",
-      "Real-time data transfer with webhooks",
-      "Data transformation and formatting",
-      "Secure and reliable connections"
+      "Real-time webhook handling",
+      "Data transformation/formatting",
+      "Secure and reliable bridges"
     ]
   },
 ];
@@ -86,7 +87,6 @@ const Services: React.FC = () => {
         observer.observe(sectionRef.current);
     }
     
-    // Parallax effect for cards on scroll
     const handleScroll = () => {
       const screenHeight = window.innerHeight;
       cardRefs.current.forEach((ref, index) => {

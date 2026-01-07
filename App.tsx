@@ -1,9 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectModal from './components/ProjectModal';
@@ -22,7 +25,7 @@ const App: React.FC = () => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.getElementById('root')?.classList.add('loaded');
-    }, 1000); // Wait for animation (0.8s) + buffer
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -53,8 +56,10 @@ const App: React.FC = () => {
         <main className="max-w-8xl mx-auto px-4 md:px-8">
           <Hero onKnowMoreClick={handleKnowMoreClick} />
           <Services />
+          <Experience />
           <Skills />
           <Projects onProjectClick={handleProjectClick} />
+          <Testimonials />
           <Contact />
         </main>
         <Footer />

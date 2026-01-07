@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import { Icons } from '../constants';
 
@@ -191,8 +192,10 @@ ${formData.anythingElse || 'None'}
   
   const needsOptions = [
     "Workflow Automation (Zapier, Make, n8n)",
-    "AI Chatbot Integration (ChatGPT, Gemini, Copilot)",
-    "CRM Setup / Optimization (HubSpot, Pipedrive)",
+    "AI Chatbot Integration (ChatGPT, Gemini)",
+    "CRM & Lead Integrations (HubSpot, Facebook Forms)",
+    "Productivity & Reporting Automation",
+    "API & Custom Webhook Connections",
   ];
 
   const timelineOptions = [
@@ -365,7 +368,7 @@ ${formData.anythingElse || 'None'}
 
                 <div>
                   <label htmlFor="problemGoal" className="block text-sm font-medium text-text-secondary mb-1">Describe your problem or goal *</label>
-                  <textarea id="problemGoal" name="problemGoal" rows={4} value={formData.problemGoal} onChange={handleInputChange} required className="w-full bg-background border border-border rounded-md px-3 py-2 text-text-main placeholder:text-text-secondary/60 transition hover:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Example: “I want to automate lead transfer from Facebook to Google Sheets to save time.”"></textarea>
+                  <textarea id="problemGoal" name="problemGoal" rows={4} value={formData.problemGoal} onChange={handleInputChange} required className="w-full bg-background border border-border rounded-md px-3 py-2 text-text-main placeholder:text-text-secondary/60 transition hover:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Example: “I want to automate lead transfer from Facebook to HubSpot to save time.”"></textarea>
                   {errors.problemGoal && <p className="text-red-500 text-sm mt-1">{errors.problemGoal}</p>}
                 </div>
 
